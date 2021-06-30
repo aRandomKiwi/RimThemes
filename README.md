@@ -26,10 +26,10 @@ Modify all game UI, make RimWorld look as you are or as you want.
 Fully customizable (custom fonts and many other things can be Disabled in mod settings ! ) updates.
 
 <p align="center">
-    <img src="https://i.imgur.com/pyHueEI.png" alt="RimThemes" />
+    <img src="https://i.imgur.com/GCVVucp.jpg" alt="RimThemes screenshot 1" />
 </p>
 <p align="center">
-    <img src="https://i.imgur.com/2yMhy51.png" alt="RimThemes" />
+    <img src="https://i.imgur.com/qLIlBPb.jpg" alt="RimThemes screenshot 2" />
 </p>
 
 ## Make your own themes
