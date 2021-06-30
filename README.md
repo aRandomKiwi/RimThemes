@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-	<a href="https://github.com/Atla55/Android-Tiers-Core/releases/">
+	<a href="https://github.com/aRandomKiwi/RimThemes/releases">
 		<img src="https://img.shields.io/badge/release-NX rev2-4BC51D.svg?style=flat" alt="NX rev2" />
     </a>
 	<img src="https://img.shields.io/github/downloads-pre/aRandomKiwi/RimThemes/total.svg?style=popout-square&color=green" alt="Github Total Downloads" />
