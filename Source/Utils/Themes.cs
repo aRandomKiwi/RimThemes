@@ -1401,6 +1401,11 @@ namespace aRandomKiwi.RimThemes
             if (forcedFontTheme != "")
                 theme = forcedFontTheme;
 
+            if (Settings.disableCustomFonts || !DBGUIStyle.TryGetValue(theme, out p1) || p1 == null)
+            {
+                return null;
+            }
+
             //Extract from cache
             switch (gf)
             {
@@ -1418,10 +1423,6 @@ namespace aRandomKiwi.RimThemes
                     break;
             }
 
-            if (Settings.disableCustomFonts || !DBGUIStyle.TryGetValue(theme, out p1) || p1 == null)
-            {
-                return null;
-            }
 
             //Put in cache
             switch (gf)

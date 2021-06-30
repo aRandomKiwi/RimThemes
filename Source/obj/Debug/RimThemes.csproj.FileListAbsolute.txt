@@ -12,3 +12,4 @@ C:\Users\kiwi\Desktop\Dev RMModsV1.1\RimThemes\obj\Debug\RimThemes.csprojAssembl
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RimThemes\Source\obj\Debug\RimThemes.csproj.CoreCompileInputs.cache
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RimThemes\Source\obj\Debug\RimThemes.csproj.CopyComplete
 C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RimThemes\Source\obj\Debug\RimThemes.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RimThemes\Source\obj\Debug\RimThemes.csprojAssemblyReference.cache
