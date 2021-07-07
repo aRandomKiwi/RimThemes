@@ -210,7 +210,25 @@ namespace aRandomKiwi.RimThemes
                 new FOI("WarningColor"), new FOI("ColonistCountColor")
             };
 
-            
+            fieldsOfInterestColor["ColorLibrary"] = new List<FOI>()
+            {
+                new FOI("RedReadable"),new FOI("Red"),new FOI("Brown"),new FOI("Pink"),new FOI("Blue"),new FOI("Green")
+                ,new FOI("Purple"),new FOI("Black"),new FOI("Violet"),new FOI("Teal"),new FOI("Grey"),new FOI("Magenta")
+                ,new FOI("Orange"),new FOI("Yellow"),new FOI("Leather"),new FOI("LightPurple"),new FOI("LimeGreen"),new FOI("SkyBlue")
+                ,new FOI("LightGreen"),new FOI("LightBlue"),new FOI("DarkOrange"),new FOI("Sand"),new FOI("PastelGreen"),new FOI("Mint")
+                ,new FOI("LightOrange"),new FOI("BrightPink"),new FOI("DeepPurple"),new FOI("DarkBrown"),new FOI("Taupe"),new FOI("PeaGreen")
+                ,new FOI("PukeGreen"),new FOI("BlueGreen"),new FOI("Khaki"),new FOI("Burgundy"),new FOI("DarkTeal"),new FOI("BrickRed")
+                ,new FOI("RoyalPurple"),new FOI("Plum"),new FOI("Gold"),new FOI("BabyBlue"),new FOI("YellowGreen"),new FOI("BrightPurple")
+                ,new FOI("DarkRed"),new FOI("PaleBlue"),new FOI("GrassGreen"),new FOI("Navy"),new FOI("Aquamarine"),new FOI("BurntOrange")
+                ,new FOI("NeonGreen"),new FOI("BrightBlue"),new FOI("Rose"),new FOI("LightPink"),new FOI("Mustard"),new FOI("Indigo")
+                ,new FOI("Lime"),new FOI("DarkPink"),new FOI("OliveGreen"),new FOI("Peach"),new FOI("PaleGreen"),new FOI("LightBrown")
+                ,new FOI("HotPink"),new FOI("Lilac"),new FOI("NavyBlue"),new FOI("RoyalBlue"),new FOI("Beige"),new FOI("Salmon")
+                ,new FOI("Olive"),new FOI("Maroon"),new FOI("BrightGreen"),new FOI("Mauve"),new FOI("ForestGreen"),new FOI("Aqua")
+                ,new FOI("Cyan"),new FOI("Tan"),new FOI("DarkBlue"),new FOI("Lavender"),new FOI("Lavender"),new FOI("DarkGreen")
+                ,new FOI("LogError")
+
+            };
+
 
 
             fieldsOfInterestColorNS["Dialog_SaveFileList"] = "RimWorld";
@@ -223,7 +241,8 @@ namespace aRandomKiwi.RimThemes
             fieldsOfInterestColorNS["NeedsCardUtility"] = "RimWorld";
             fieldsOfInterestColorNS["Hediff_Injury"] = "Verse";
             fieldsOfInterestColorNS["ColoredText"] = "Verse";
-            
+            fieldsOfInterestColorNS["ColorLibrary"] = "Verse";
+
         }
 
         public static void startInit()
