@@ -48,7 +48,9 @@ namespace aRandomKiwi.RimThemes
                     return true;
 
                 //If the animated background is available and loaded, we start reading it!
-                if (Current.ProgramState == ProgramState.Entry && Themes.DBAnimatedBackground.ContainsKey(curTheme) && !Settings.disableVideoBg)
+                bool animatedBgOK = Current.ProgramState == ProgramState.Entry && Themes.DBAnimatedBackground.ContainsKey(curTheme) && !Settings.disableVideoBg;
+                bool animatedBgOKException = false;
+                if (animatedBgOK)
                 {
                     Rect pos;
                     if ((double)Screen.width <= (double)Screen.height * ((double)MainBackgroundSize.x / (double)MainBackgroundSize.y))
@@ -74,6 +76,7 @@ namespace aRandomKiwi.RimThemes
                             Utils.CurrentMainAnimatedBg.enabled = true;
                         }
 
+                        
                         if (!Utils.CurrentMainAnimatedBgSourceSet)
                         {
                             Utils.CurrentMainAnimatedBg.renderMode = VideoRenderMode.RenderTexture;
@@ -89,7 +92,7 @@ namespace aRandomKiwi.RimThemes
                             Utils.CurrentMainAnimatedBgSourceSet = true;
                             Utils.CurrentMainAnimatedBg.errorReceived += delegate (VideoPlayer source, string message)
                             {
-                                Themes.LogMsg("VideoPlayer_Error : " + message+ " ");
+                                Themes.LogMsg("VideoPlayer_Error : " + message + " ");
                             };
                             Utils.CurrentMainAnimatedBg.time = 0;
                             Utils.CurrentMainAnimatedBg.Prepare();
@@ -101,18 +104,17 @@ namespace aRandomKiwi.RimThemes
                             Utils.CurrentMainAnimatedBg.Play();
                             Utils.CurrentMainAnimatedBgPlaying = true;
                         }
-                        else
-                        {
-                            //To wait RimWorld original background display
-                            return true;
-                        }
+
+                        //To wait show the picture background
+                        animatedBgOKException = true;
                     }
                     else
                     {
                         GUI.DrawTexture(pos, Utils.CurrentMainAnimatedBg.texture, ScaleMode.ScaleToFit);
                     }
                 }
-                else
+
+                if(!animatedBgOK || animatedBgOKException)
                 {
                     bool flag = true;
 

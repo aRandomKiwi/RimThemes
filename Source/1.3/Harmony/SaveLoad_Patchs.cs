@@ -191,6 +191,8 @@ namespace aRandomKiwi.RimThemes
     {
         public static void Prefix()
         {
+            Utils.CurrentMainAnimatedBgPlaying = false;
+            Utils.CurrentMainAnimatedBgSourceSet = false;
             LoaderGM.curStep = LoaderSteps.FinalizeLoad;
         }
     }
