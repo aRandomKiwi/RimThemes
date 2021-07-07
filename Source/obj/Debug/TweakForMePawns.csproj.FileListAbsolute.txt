@@ -1,5 +1,0 @@
-C:\Users\kiwi\Desktop\Dev RMMods\TFM Pawns\obj\Debug\TweakForMePawns.csproj.CoreCompileInputs.cache
-C:\Users\kiwi\Desktop\Dev RMMods\TFM Pawns\obj\Debug\TweakForMePawns.csproj.CopyComplete
-C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\Tweak For Me Pawns\Assemblies\ThemesForMe.dll
-C:\Users\kiwi\Desktop\Dev RMMods\TFM Pawns\obj\Debug\ThemesForMe.dll
-C:\Users\kiwi\Desktop\Dev RMMods\TFM Pawns\obj\Debug\TweakForMePawns.csprojAssemblyReference.cache

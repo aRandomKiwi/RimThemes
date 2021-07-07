@@ -1,0 +1,9 @@
+C:\Users\kiwi\Desktop\Dev RMMods\Themes For Me\obj\Debug\RimTheme.csprojAssemblyReference.cache
+C:\Users\kiwi\Desktop\Dev RMMods\Themes For Me\obj\Debug\RimTheme.csproj.CoreCompileInputs.cache
+C:\Users\kiwi\Desktop\Dev RMMods\Themes For Me\obj\Debug\RimTheme.csproj.CopyComplete
+C:\Users\kiwi\Desktop\Dev RMMods\Themes For Me\obj\Debug\RimTheme.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\RimTheme\Assemblies\RimTheme.dll
+C:\Users\kiwi\Desktop\Dev RMMods\RimTheme\obj\Debug\RimTheme.csproj.CoreCompileInputs.cache
+C:\Users\kiwi\Desktop\Dev RMMods\RimTheme\obj\Debug\RimTheme.csproj.CopyComplete
+C:\Users\kiwi\Desktop\Dev RMMods\RimTheme\obj\Debug\RimTheme.dll
+C:\Users\kiwi\Desktop\Dev RMMods\RimTheme\obj\Debug\RimTheme.csprojAssemblyReference.cache
