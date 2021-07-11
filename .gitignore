@@ -10,3 +10,6 @@
 **/.vs/Release
 **/.vs
 **/obj/Debug
+**/obj
+obj/
+.vs/
