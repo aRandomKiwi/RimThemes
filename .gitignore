@@ -9,6 +9,4 @@
 
 **/.vs/Release
 **/.vs
-**/.vs/Debug
-**/.vs/Obj
-**/.vs/Object
+**/obj/Debug
