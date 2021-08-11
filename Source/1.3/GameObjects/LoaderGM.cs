@@ -704,6 +704,8 @@ namespace aRandomKiwi.RimThemes
         public static bool fontsToLoad = false;
         public static bool autosave = false;
         public static bool themeTexAlreadyLoaded = false;
+
+        public static bool reachedMainMenu = false;
     }
 }
 

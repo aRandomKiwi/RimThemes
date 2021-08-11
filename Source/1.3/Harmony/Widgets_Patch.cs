@@ -312,7 +312,7 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPrefix]
         static bool Prefix(Rect rect, GUIContent content)
         {
-            if (!(Themes.initialized && Themes.vanillaThemeSaved))
+            if (!(Themes.initialized && Themes.vanillaThemeSaved) || !LoaderGM.reachedMainMenu)
                 return true;
 
             try
@@ -346,7 +346,7 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPrefix]
         static bool Prefix(Rect rect, string label)
         {
-            if (!(Themes.initialized && Themes.vanillaThemeSaved) )
+            if (!(Themes.initialized && Themes.vanillaThemeSaved) || !LoaderGM.reachedMainMenu)
                 return true;
 
             try
@@ -387,6 +387,9 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPostfix]
         static void Postfix(Rect rect, string label)
         {
+            if (!(Themes.initialized && Themes.vanillaThemeSaved) || !LoaderGM.reachedMainMenu)
+                return;
+
             GUI.color = prevColor;
         }
     }

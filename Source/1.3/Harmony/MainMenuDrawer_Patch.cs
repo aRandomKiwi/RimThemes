@@ -18,7 +18,8 @@ namespace aRandomKiwi.RimThemes
         static bool Prefix(ref Vector2 ___PaneSize, ref Vector2 ___TitleSize, ref bool ___anyMapFiles, Vector2 ___LudeonLogoSize, Texture2D ___TexTitle, Texture2D ___TexLudeonLogo)
         {
             try
-            {  
+            {
+                LoaderGM.reachedMainMenu = true;
                 float start = 0;
                 float start2 = 0;
                 float startMPC = 0;

@@ -20,7 +20,7 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPrefix]
         static bool Prefix(Rect position, Texture image)
         {
-            if (!(Themes.initialized && Themes.vanillaThemeSaved) || (int)LoaderGM.curStep <= 10 )
+            if (!(Themes.initialized && Themes.vanillaThemeSaved) || !LoaderGM.reachedMainMenu)
                 return true;
 
             try
@@ -43,7 +43,7 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPostfix]
         static void Postfix(Rect position, Texture image)
         {
-            if((int)LoaderGM.curStep > 10)
+            if(LoaderGM.reachedMainMenu)
                 GUI.color = prevColor;
         }
     }
