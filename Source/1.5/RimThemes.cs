@@ -8,6 +8,12 @@ namespace aRandomKiwi.RimThemes
     [StaticConstructorOnStartup]
     class RimThemes : Mod
     {
+        static RimThemes()
+        {
+            //Add GM of the loader to override the display
+            comp = GameObject.Find("Camera").AddComponent<LoaderGM>() as LoaderGM;
+        }
+
         public static LoaderGM comp;
         public RimThemes(ModContentPack content) : base(content)
         {
@@ -21,9 +27,6 @@ namespace aRandomKiwi.RimThemes
             Themes.LogMsg("Init Harmony patchs");
 
             Log.Message(Utils.releaseInfo);
-
-            //Add GM of the loader to override the display
-            comp = GameObject.Find("Camera").AddComponent<LoaderGM>() as LoaderGM;
         }
 
         public void Save()
