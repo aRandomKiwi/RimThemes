@@ -57,6 +57,19 @@ namespace aRandomKiwi.RimThemes
         public static int cornerInfoMode = 1;
         public static bool disableDefaultThemes = false;
 
+
+        public static bool SectionGeneralExpanded = false;
+        public static bool SectionOpacityExpanded = false;
+        public static bool SectionRandomBgExpanded = false;
+        public static bool SectionDialogStackingExpanded = false;
+        public static bool SectionMainMenuAlignmentExpanded = false;
+        public static bool SectionWindowAnimExpanded = false;
+        public static bool SectionRimThemesLogoExpanded = false;
+        public static bool SectionWindowShadowExpanded = false;
+        public static bool SectionExtensionIconExpanded = false;
+        public static bool SectionLudeonLogoExpanded = false;
+        public static bool SectionInfosExpanded = false;
+
         public static Vector2 scrollPosition = Vector2.zero;
 
         public static string curTheme = "-1§Vanilla";
@@ -79,117 +92,192 @@ namespace aRandomKiwi.RimThemes
 
             list.Begin(scrollRect);
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsAlphaSection".Translate());
-            list.GapLine();
+            list.Gap(10);
+            if (SectionGeneralExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            bool disabledOverrideThemeWindowFillColorAlphaPrev = disabledOverrideThemeWindowFillColorAlpha;
-            list.CheckboxLabeled("RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel".Translate(), ref disabledOverrideThemeWindowFillColorAlpha);
-
-            if (!disabledOverrideThemeWindowFillColorAlpha)
+            if (list.ButtonText("RimTheme_SettingsGlobalSection".Translate()))
             {
-                list.Label("RimTheme_SettingsOverrideWindowFillColorAlphaLevel".Translate((int)(overrideThemeWindowFillColorAlphaLevelTmp * 100)));
-                overrideThemeWindowFillColorAlphaLevelTmp = list.Slider(overrideThemeWindowFillColorAlphaLevelTmp, 0.0f, 1.0f);
+                SectionGeneralExpanded = !SectionGeneralExpanded;
+            }
+            GUI.color = Color.white;
 
-                if (overrideThemeWindowFillColorAlphaLevelTmp != overrideThemeWindowFillColorAlphaLevel)
-                    GUI.color = Color.green;
-                else
-                    GUI.color = Color.gray;
+            if (SectionGeneralExpanded)
+            {
 
-                if (list.ButtonText("Apply"))
-                {
-                    overrideThemeWindowFillColorAlphaLevel = overrideThemeWindowFillColorAlphaLevelTmp;
-                    Utils.applyWindowFillColorOpacityOverride(Settings.curTheme);
-                }
-                GUI.color = Color.white;
+                list.CheckboxLabeled("RimTheme_SettingsDisableDefaultThemes".Translate(), ref disableDefaultThemes);
+
+                list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
+                list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
+                list.CheckboxLabeled("RimTheme_SettingsDisableWallpaper".Translate(), ref disableWallpaper);
+                list.CheckboxLabeled("RimTheme_SettingsDisableFont".Translate(), ref disableCustomFonts);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCustomFontConsole".Translate(), ref disableCustomFontsInConsole);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCursor".Translate(), ref disableCustomCursors);
+                list.CheckboxLabeled("RimTheme_SettingsDisableParticle".Translate(), ref disableParticle);
+                list.CheckboxLabeled("RimTheme_SettingsShowThemeManagerAsList".Translate(), ref modManagerAsOptionList);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCustomSounds".Translate(), ref disableCustomSounds);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCustomSongs".Translate(), ref disableCustomSongs);
+                list.CheckboxLabeled("RimTheme_SettingsDisableButtonBG".Translate(), ref disableButtonBG);
+                list.CheckboxLabeled("RimTheme_SettingsDisableTapestry".Translate(), ref disableTapestry);
+                list.CheckboxLabeled("RimTheme_SettingsHideLoadingText".Translate(), ref hideLoadingText);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCustomLoader".Translate(), ref disableCustomLoader);
+                list.CheckboxLabeled("RimTheme_SettingsVerboseLogs".Translate(), ref verboseMode);
+                list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint);
             }
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsGlobalSection".Translate());
-            list.GapLine();
+            if (SectionOpacityExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            list.CheckboxLabeled("RimTheme_SettingsDisableDefaultThemes".Translate(), ref disableDefaultThemes);
-            
-            list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
-            list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
-            list.CheckboxLabeled("RimTheme_SettingsDisableWallpaper".Translate(), ref disableWallpaper);
-            list.CheckboxLabeled("RimTheme_SettingsDisableFont".Translate(), ref disableCustomFonts);
-            list.CheckboxLabeled("RimTheme_SettingsDisableCustomFontConsole".Translate(), ref disableCustomFontsInConsole);
-            list.CheckboxLabeled("RimTheme_SettingsDisableCursor".Translate(), ref disableCustomCursors);
-            list.CheckboxLabeled("RimTheme_SettingsDisableParticle".Translate(), ref disableParticle);
-            list.CheckboxLabeled("RimTheme_SettingsShowThemeManagerAsList".Translate(), ref modManagerAsOptionList);
-            list.CheckboxLabeled("RimTheme_SettingsDisableCustomSounds".Translate(), ref disableCustomSounds);
-            list.CheckboxLabeled("RimTheme_SettingsDisableCustomSongs".Translate(), ref disableCustomSongs);
-            list.CheckboxLabeled("RimTheme_SettingsDisableButtonBG".Translate(), ref disableButtonBG);
-            list.CheckboxLabeled("RimTheme_SettingsDisableTapestry".Translate(), ref disableTapestry);
-            list.CheckboxLabeled("RimTheme_SettingsHideLoadingText".Translate(), ref hideLoadingText);
-            list.CheckboxLabeled("RimTheme_SettingsDisableCustomLoader".Translate(), ref disableCustomLoader);
-            list.CheckboxLabeled("RimTheme_SettingsVerboseLogs".Translate(), ref verboseMode);
-            list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint);
+            if (list.ButtonText("RimTheme_SettingsAlphaSection".Translate()))
+            {
+                SectionOpacityExpanded = !SectionOpacityExpanded;
+            }
+            GUI.color = Color.white;
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsRandomBackgroundSection".Translate());
-            list.GapLine();
+            if (SectionOpacityExpanded)
+            {
+                bool disabledOverrideThemeWindowFillColorAlphaPrev = disabledOverrideThemeWindowFillColorAlpha;
+                list.CheckboxLabeled("RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel".Translate(), ref disabledOverrideThemeWindowFillColorAlpha);
 
-            list.CheckboxLabeled("RimTheme_SettingsDisableRandomBg".Translate(), ref disableRandomBg);
-            list.CheckboxLabeled("RimTheme_SettingsKeepCurrentRandomBg".Translate(), ref keepCurrentBg);
-            if (keepCurrentBg && disableRandomBg)
-                keepCurrentBg = false;
+                if (!disabledOverrideThemeWindowFillColorAlpha)
+                {
+                    list.Label("RimTheme_SettingsOverrideWindowFillColorAlphaLevel".Translate((int)(overrideThemeWindowFillColorAlphaLevelTmp * 100)));
+                    overrideThemeWindowFillColorAlphaLevelTmp = list.Slider(overrideThemeWindowFillColorAlphaLevelTmp, 0.0f, 1.0f);
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsDialogStacking".Translate());
-            list.GapLine();
+                    if (overrideThemeWindowFillColorAlphaLevelTmp != overrideThemeWindowFillColorAlphaLevel)
+                        GUI.color = Color.red;
+                    else
+                        GUI.color = Color.gray;
 
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (dialogStacking == 1)))
-                dialogStacking = 1;
-            if (list.RadioButton("RimTheme_SettingsDialogStackingEnabled".Translate(), (dialogStacking == 2)))
-                dialogStacking = 2;
-            if (list.RadioButton("RimTheme_SettingsDialogStackingDisabled".Translate(), (dialogStacking == 3)))
-                dialogStacking = 3;
+                    if (list.ButtonText("Apply"))
+                    {
+                        overrideThemeWindowFillColorAlphaLevel = overrideThemeWindowFillColorAlphaLevelTmp;
+                        Utils.applyWindowFillColorOpacityOverride(Settings.curTheme);
+                    }
+                    GUI.color = Color.white;
+                    list.Gap(40);
+                }
+            }
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsMenuAlignment".Translate());
-            list.GapLine();
+            if (SectionRandomBgExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            if (list.RadioButton("RimTheme_SettingsMenuAlignmentLeft".Translate(), (menuAlignment == 0)))
-                menuAlignment = 0;
-            if (list.RadioButton("RimTheme_SettingsMenuAlignmentMiddle".Translate(), (menuAlignment == 1)))
-                menuAlignment = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuAlignmentRight".Translate(), (menuAlignment == 2)))
-                menuAlignment = 2;
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (menuAlignment == 3)))
-                menuAlignment = 3;
+            if (list.ButtonText("RimTheme_SettingsRandomBackgroundSection".Translate()))
+            {
+                SectionRandomBgExpanded = !SectionRandomBgExpanded;
+            }
+            GUI.color = Color.white;
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsWindowAnimation".Translate());
-            list.GapLine();
+            if (SectionRandomBgExpanded)
+            {
+                list.CheckboxLabeled("RimTheme_SettingsDisableRandomBg".Translate(), ref disableRandomBg);
+                list.CheckboxLabeled("RimTheme_SettingsKeepCurrentRandomBg".Translate(), ref keepCurrentBg);
+                if (keepCurrentBg && disableRandomBg)
+                    keepCurrentBg = false;
+            }
 
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationNone".Translate(), (windowAnimation == (int)WindowAnim.None)))
-                windowAnimation = (int)WindowAnim.None;
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (windowAnimation == (int)WindowAnim.Theme)))
-                windowAnimation = (int)WindowAnim.Theme;
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationClip".Translate(), (windowAnimation == (int)WindowAnim.Clip)))
-                windowAnimation = (int)WindowAnim.Clip;
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideLeft".Translate(), (windowAnimation == (int)WindowAnim.SlideLeft)))
-                windowAnimation = (int)WindowAnim.SlideLeft;
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideRight".Translate(), (windowAnimation == (int)WindowAnim.SlideRight)))
-                windowAnimation = (int)WindowAnim.SlideRight;
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideTop".Translate(), (windowAnimation == (int)WindowAnim.SlideTop)))
-                windowAnimation = (int)WindowAnim.SlideTop;
-            if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideBottom".Translate(), (windowAnimation == (int)WindowAnim.SlideBottom)))
-                windowAnimation = (int)WindowAnim.SlideBottom;
+            if (SectionDialogStackingExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsMenuRTLogo".Translate());
-            list.GapLine();
+            if (list.ButtonText("RimTheme_SettingsDialogStacking".Translate()))
+            {
+                SectionDialogStackingExpanded = !SectionDialogStackingExpanded;
+            }
+            GUI.color = Color.white;
 
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (rimthemesLogoMode == 1)))
-                rimthemesLogoMode = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (rimthemesLogoMode == 2)))
-                rimthemesLogoMode = 2;
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (rimthemesLogoMode == 3)))
-                rimthemesLogoMode = 3;
+            if (SectionDialogStackingExpanded)
+            {
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (dialogStacking == 1)))
+                    dialogStacking = 1;
+                if (list.RadioButton("RimTheme_SettingsDialogStackingEnabled".Translate(), (dialogStacking == 2)))
+                    dialogStacking = 2;
+                if (list.RadioButton("RimTheme_SettingsDialogStackingDisabled".Translate(), (dialogStacking == 3)))
+                    dialogStacking = 3;
+            }
 
+            if (SectionMainMenuAlignmentExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsMenuAlignment".Translate()))
+            {
+                SectionMainMenuAlignmentExpanded = !SectionMainMenuAlignmentExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionMainMenuAlignmentExpanded)
+            {
+
+                if (list.RadioButton("RimTheme_SettingsMenuAlignmentLeft".Translate(), (menuAlignment == 0)))
+                    menuAlignment = 0;
+                if (list.RadioButton("RimTheme_SettingsMenuAlignmentMiddle".Translate(), (menuAlignment == 1)))
+                    menuAlignment = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuAlignmentRight".Translate(), (menuAlignment == 2)))
+                    menuAlignment = 2;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (menuAlignment == 3)))
+                    menuAlignment = 3;
+            }
+
+            if (SectionWindowAnimExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsWindowAnimation".Translate()))
+            {
+                SectionWindowAnimExpanded = !SectionWindowAnimExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionWindowAnimExpanded)
+            {
+
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationNone".Translate(), (windowAnimation == (int)WindowAnim.None)))
+                    windowAnimation = (int)WindowAnim.None;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (windowAnimation == (int)WindowAnim.Theme)))
+                    windowAnimation = (int)WindowAnim.Theme;
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationClip".Translate(), (windowAnimation == (int)WindowAnim.Clip)))
+                    windowAnimation = (int)WindowAnim.Clip;
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideLeft".Translate(), (windowAnimation == (int)WindowAnim.SlideLeft)))
+                    windowAnimation = (int)WindowAnim.SlideLeft;
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideRight".Translate(), (windowAnimation == (int)WindowAnim.SlideRight)))
+                    windowAnimation = (int)WindowAnim.SlideRight;
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideTop".Translate(), (windowAnimation == (int)WindowAnim.SlideTop)))
+                    windowAnimation = (int)WindowAnim.SlideTop;
+                if (list.RadioButton("RimTheme_SettingsWindowAnimationSlideBottom".Translate(), (windowAnimation == (int)WindowAnim.SlideBottom)))
+                    windowAnimation = (int)WindowAnim.SlideBottom;
+            }
+
+            if (SectionRimThemesLogoExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsMenuRTLogo".Translate()))
+            {
+                SectionRimThemesLogoExpanded = !SectionRimThemesLogoExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionRimThemesLogoExpanded)
+            {
+
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (rimthemesLogoMode == 1)))
+                    rimthemesLogoMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (rimthemesLogoMode == 2)))
+                    rimthemesLogoMode = 2;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (rimthemesLogoMode == 3)))
+                    rimthemesLogoMode = 3;
+            }
             if (disableCustomCursorsPrev != disableCustomCursors)
             {
                 CustomCursor.Deactivate();
@@ -197,46 +285,87 @@ namespace aRandomKiwi.RimThemes
                 disableCustomCursorsPrev = disableCustomCursors;
             }
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsWindowsShadow".Translate());
-            list.GapLine();
+            if (SectionWindowShadowExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (windowsShadowMode == 1)))
-                windowsShadowMode = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (windowsShadowMode == 2)))
-                windowsShadowMode = 2;
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (windowsShadowMode == 3)))
-                windowsShadowMode = 3;
+            if (list.ButtonText("RimTheme_SettingsWindowsShadow".Translate()))
+            {
+                SectionWindowShadowExpanded = !SectionWindowShadowExpanded;
+            }
+            GUI.color = Color.white;
 
-            list.GapLine();
-            list.Label("RimTheme_SettingsExpansionsIcons".Translate());
-            list.GapLine();
+            if (SectionWindowShadowExpanded)
+            {
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (windowsShadowMode == 1)))
+                    windowsShadowMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (windowsShadowMode == 2)))
+                    windowsShadowMode = 2;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (windowsShadowMode == 3)))
+                    windowsShadowMode = 3;
+            }
 
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (expansionsIconsMode == 1)))
-                expansionsIconsMode = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (expansionsIconsMode == 2)))
-                expansionsIconsMode = 2;
-            if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (expansionsIconsMode == 3)))
-                expansionsIconsMode = 3;
+            if (SectionExtensionIconExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
-            list.GapLine();
-            list.Label("RimTheme_LudeonLogo".Translate());
-            list.GapLine();
+            if (list.ButtonText("RimTheme_SettingsExpansionsIcons".Translate()))
+            {
+                SectionExtensionIconExpanded = !SectionExtensionIconExpanded;
+            }
+            GUI.color = Color.white;
 
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (ludeonLogoMode == 1)))
-                ludeonLogoMode = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (ludeonLogoMode == 2)))
-                ludeonLogoMode = 2;
+            if (SectionExtensionIconExpanded)
+            {
 
-            list.GapLine();
-            list.Label("RimTheme_InfoCorner".Translate());
-            list.GapLine();
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (expansionsIconsMode == 1)))
+                    expansionsIconsMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (expansionsIconsMode == 2)))
+                    expansionsIconsMode = 2;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (expansionsIconsMode == 3)))
+                    expansionsIconsMode = 3;
+            }
 
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (cornerInfoMode == 1)))
-                cornerInfoMode = 1;
-            if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (cornerInfoMode == 2)))
-                cornerInfoMode = 2;
+            if (SectionLudeonLogoExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
 
+            if (list.ButtonText("RimTheme_LudeonLogo".Translate()))
+            {
+                SectionLudeonLogoExpanded = !SectionLudeonLogoExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionLudeonLogoExpanded)
+            {
+
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (ludeonLogoMode == 1)))
+                    ludeonLogoMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (ludeonLogoMode == 2)))
+                    ludeonLogoMode = 2;
+            }
+
+            if (SectionInfosExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_InfoCorner".Translate()))
+            {
+                SectionInfosExpanded = !SectionInfosExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionInfosExpanded)
+            {
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (cornerInfoMode == 1)))
+                    cornerInfoMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (cornerInfoMode == 2)))
+                    cornerInfoMode = 2;
+            }
 
             //Change in disable custom font
             if (disableCustomFontsPrev != disableCustomFonts)
