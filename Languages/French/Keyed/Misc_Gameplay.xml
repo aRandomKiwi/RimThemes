@@ -8,7 +8,7 @@
 	<RimTheme_SettingsWindowsShadow>Ombrage des fenêtres</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Icônes d'extensions Rimworld</RimTheme_SettingsExpansionsIcons>
 	<RimTheme_SettingsAlphaSection>Niveau d'opacité</RimTheme_SettingsAlphaSection>
-	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Désactiver le forcing du niveau d'opacité des fenêtres (redémarrage nécessaire pour restaurer l'opacité d'origine)</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
+	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Ne pas forcer le niveau d'opacité des fenêtres</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>Niveau d'opacité de la fenêtre : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsGlobalSection>Paramètres généraux</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDisableTinyCustomFont>Désactiver les polices d'écritures pour les petits textes</RimTheme_SettingsDisableTinyCustomFont>
@@ -50,6 +50,7 @@
 	<RimTheme_SettingsWindowAnimationSlideRight>Translation vers la droite</RimTheme_SettingsWindowAnimationSlideRight>
 	<RimTheme_SettingsWindowAnimationSlideTop>Translation vers le haut</RimTheme_SettingsWindowAnimationSlideTop>
 	<RimTheme_SettingsWindowAnimationSlideBottom>Translation vers le bas</RimTheme_SettingsWindowAnimationSlideBottom>
+	<RimTheme_SettingsDisableDefaultThemes>Désactiver les thèmes par défaut de RimThemes (nécessite un redémarrage du jeux)</RimTheme_SettingsDisableDefaultThemes>
 	
 	<RimThemes_CatFuture>Futur</RimThemes_CatFuture>
 	<RimThemes_CatMedieval>Médiéval</RimThemes_CatMedieval>

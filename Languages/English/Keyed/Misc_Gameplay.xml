@@ -8,7 +8,7 @@
 	<RimTheme_SettingsWindowsShadow>Windows shadow</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Rimworld expansions icons</RimTheme_SettingsExpansionsIcons>
 	<RimTheme_SettingsAlphaSection>Opacity level</RimTheme_SettingsAlphaSection>
-	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Disable overriding of windows opacity level (need restart to restore original opacity)</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
+	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Do not override windows opacity level</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>Windows opacity level : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsGlobalSection>Global settings</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDisableTinyCustomFont>Disable custom fonts for tiny texts</RimTheme_SettingsDisableTinyCustomFont>
@@ -50,6 +50,7 @@
 	<RimTheme_SettingsWindowAnimationSlideRight>Slide right</RimTheme_SettingsWindowAnimationSlideRight>
 	<RimTheme_SettingsWindowAnimationSlideTop>Slide top</RimTheme_SettingsWindowAnimationSlideTop>
 	<RimTheme_SettingsWindowAnimationSlideBottom>Slide bottom</RimTheme_SettingsWindowAnimationSlideBottom>
+	<RimTheme_SettingsDisableDefaultThemes>Disable RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
 	
 	<RimThemes_CatFuture>Future</RimThemes_CatFuture>
 	<RimThemes_CatMedieval>Medieval</RimThemes_CatMedieval>

@@ -184,9 +184,9 @@ namespace aRandomKiwi.RimThemes
                     num += vector.y;
                     num2++;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    Log.Message(e.Message);
                 }
             }
             //Deactivation forcing theme

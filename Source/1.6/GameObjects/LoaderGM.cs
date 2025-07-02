@@ -53,7 +53,7 @@ namespace aRandomKiwi.RimThemes
                         float num2 = (float)UI.screenWidth * (BGPlanetSize.y / BGPlanetSize.x);
                         position = new Rect(0f, (float)(UI.screenHeight / 2) - num2 / 2f, width, num2);
                     }
-                    GUI.DrawTexture(position, getThemeRscLoader(LoaderRSC.BGLoader), ScaleMode.ScaleToFit);
+                    GUI.DrawTexture(position, getThemeRscLoader(LoaderRSC.BGLoader), ScaleMode.StretchToFill);
 
 
                     //Widgets.DrawRectFast(new Rect(0, 0, UI.screenWidth, UI.screenHeight), Color.black);
@@ -541,18 +541,25 @@ namespace aRandomKiwi.RimThemes
 
         public static string getDynBGLoader(string path)
         {
-            string dir = Path.GetDirectoryName(path);
-            DirectoryInfo directoryInfo = new DirectoryInfo(dir);
-            IOrderedEnumerable<FileInfo> listLoader = from f in directoryInfo.GetFiles()
-                                                     where f.Name.StartsWith("BGLoader")
-                                                     orderby f.LastWriteTime descending
-                                                     select f;
-
-            if (listLoader.Count() <= 1)
-                return path;
-            else
+            try
             {
-                return listLoader.RandomElement().FullName;
+                string dir = Path.GetDirectoryName(path);
+                DirectoryInfo directoryInfo = new DirectoryInfo(dir);
+                IOrderedEnumerable<FileInfo> listLoader = from f in directoryInfo.GetFiles()
+                                                          where f.Name.StartsWith("BGLoader")
+                                                          orderby f.LastWriteTime descending
+                                                          select f;
+
+                if (listLoader.Count() <= 1)
+                    return path;
+                else
+                {
+                    return listLoader.RandomElement().FullName;
+                }
+            }
+            catch (Exception)
+            {
+                return path;
             }
         }
 
@@ -590,7 +597,7 @@ namespace aRandomKiwi.RimThemes
             }
 
             string[] parts = Settings.curTheme.Split('§');
-            if (parts[0] == "-1")
+            if (parts[0] == "-1" && !Settings.disableDefaultThemes)
             {
                 //Loader not loaded we try to load it
                 if (!db.ContainsKey(Settings.curTheme))

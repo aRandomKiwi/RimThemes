@@ -11,10 +11,13 @@ namespace aRandomKiwi.RimThemes
     {
         public Settings(){
             Utils.modSettings = this;
+
+            overrideThemeWindowFillColorAlphaLevelTmp = overrideThemeWindowFillColorAlphaLevel;
         }
 
         public static bool disabledOverrideThemeWindowFillColorAlpha = true;
         public static float overrideThemeWindowFillColorAlphaLevel = 0.75f;
+        public static float overrideThemeWindowFillColorAlphaLevelTmp = 0.75f;
         public static int rimthemesLogoMode = 3;
         public static int windowsShadowMode = 3;
         public static bool keepCurrentBg = false;
@@ -52,7 +55,7 @@ namespace aRandomKiwi.RimThemes
         public static bool disableFontFilterModePointPrev = true;
         public static int ludeonLogoMode = 1;
         public static int cornerInfoMode = 1;
-
+        public static bool disableDefaultThemes = false;
 
         public static Vector2 scrollPosition = Vector2.zero;
 
@@ -70,8 +73,8 @@ namespace aRandomKiwi.RimThemes
             if( Widgets.ButtonImage(new Rect((inRect.width / 2) - 90, inRect.y, 180, 144), Loader.logoTex, Color.white, Color.green))
                 Find.WindowStack.Add(new Dialog_ThemesList());
 
-            var outRect = new Rect(inRect.x, inRect.y+150, inRect.width, inRect.height-150);
-            var scrollRect = new Rect(0f, 150f, inRect.width - 16f, inRect.height * 3f + 50 );
+            var outRect = new Rect(inRect.x, inRect.y+135, inRect.width, inRect.height-135);
+            var scrollRect = new Rect(0f, 150f, inRect.width - 16f, inRect.height * 5f + 50 );
             Widgets.BeginScrollView(outRect, ref scrollPosition, scrollRect, true);
 
             list.Begin(scrollRect);
@@ -85,21 +88,28 @@ namespace aRandomKiwi.RimThemes
 
             if (!disabledOverrideThemeWindowFillColorAlpha)
             {
-                list.Label("RimTheme_SettingsOverrideWindowFillColorAlphaLevel".Translate((int)(overrideThemeWindowFillColorAlphaLevel * 100)));
-                float overrideThemeWindowFillColorAlphaLevelPrev = overrideThemeWindowFillColorAlphaLevel;
-                overrideThemeWindowFillColorAlphaLevel = list.Slider(overrideThemeWindowFillColorAlphaLevel, 0.0f, 1.0f);
+                list.Label("RimTheme_SettingsOverrideWindowFillColorAlphaLevel".Translate((int)(overrideThemeWindowFillColorAlphaLevelTmp * 100)));
+                overrideThemeWindowFillColorAlphaLevelTmp = list.Slider(overrideThemeWindowFillColorAlphaLevelTmp, 0.0f, 1.0f);
 
-                //Opacity level change => apply 
-                if(overrideThemeWindowFillColorAlphaLevel != overrideThemeWindowFillColorAlphaLevelPrev || disabledOverrideThemeWindowFillColorAlpha != disabledOverrideThemeWindowFillColorAlphaPrev)
+                if (overrideThemeWindowFillColorAlphaLevelTmp != overrideThemeWindowFillColorAlphaLevel)
+                    GUI.color = Color.green;
+                else
+                    GUI.color = Color.gray;
+
+                if (list.ButtonText("Apply"))
                 {
+                    overrideThemeWindowFillColorAlphaLevel = overrideThemeWindowFillColorAlphaLevelTmp;
                     Utils.applyWindowFillColorOpacityOverride(Settings.curTheme);
                 }
+                GUI.color = Color.white;
             }
 
             list.GapLine();
             list.Label("RimTheme_SettingsGlobalSection".Translate());
             list.GapLine();
 
+            list.CheckboxLabeled("RimTheme_SettingsDisableDefaultThemes".Translate(), ref disableDefaultThemes);
+            
             list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
             list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
             list.CheckboxLabeled("RimTheme_SettingsDisableWallpaper".Translate(), ref disableWallpaper);
@@ -353,6 +363,7 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<float>(ref overrideThemeWindowFillColorAlphaLevel, "overrideThemeWindowFillColorAlpha", 0.75f);
 
 
+            Scribe_Values.Look<bool>(ref disableDefaultThemes, "disableDefaultThemes", false);
             Scribe_Values.Look<int>(ref cornerInfoMode, "cornerInfoMode", 1);
             Scribe_Values.Look<int>(ref ludeonLogoMode, "ludeonLogoMode", 1);
             Scribe_Values.Look<int>(ref rimthemesLogoMode, "rimthemesLogoMode", 3);
@@ -393,6 +404,8 @@ namespace aRandomKiwi.RimThemes
                 disableCustomSongsPrev = disableCustomSongs;
                 disableRandomBgPrev = disableRandomBg;
                 disableFontFilterModePointPrev = disableFontFilterModePoint;
+
+                overrideThemeWindowFillColorAlphaLevelTmp = overrideThemeWindowFillColorAlphaLevel;
     }
         }
     }

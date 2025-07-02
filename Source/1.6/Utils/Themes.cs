@@ -248,14 +248,16 @@ namespace aRandomKiwi.RimThemes
         {
             try
             {
-                LoaderGM.curStep = LoaderSteps.loadingTheme;
+                    LoaderGM.curStep = LoaderSteps.loadingTheme;
 
-                //Search for theme in mod folder
-                string themesDir = Utils.currentMod.RootDir + Path.DirectorySeparatorChar + "Themes" + Path.DirectorySeparatorChar;
-                DBModInfo["-1"] = new Dictionary<string, string>();
-                DBModInfo["-1"]["name"] = "";
-
-                loadThemesInFolder("-1", themesDir, true);
+                    //Search for theme in mod folder
+                    string themesDir = Utils.currentMod.RootDir + Path.DirectorySeparatorChar + "Themes" + Path.DirectorySeparatorChar;
+                    DBModInfo["-1"] = new Dictionary<string, string>();
+                    DBModInfo["-1"]["name"] = "";
+                    if (!Settings.disableDefaultThemes)
+                    {
+                        loadThemesInFolder("-1", themesDir, true);
+                    }
             }
             catch(Exception e)
             {
@@ -488,7 +490,6 @@ namespace aRandomKiwi.RimThemes
                             {
                                 DBAnimatedBackgroundDyn[themeID].Add(v.FullName);
                                 DBAnimatedBackground[themeID] = v.FullName;
-                                Log.Message(v.FullName);
                                 Themes.LogMsg("Found and loading animated background " + v.FullName);
                             }
                         }
@@ -941,8 +942,6 @@ namespace aRandomKiwi.RimThemes
                 changeTheme<Texture2D>(DBTex, newTheme);
                 changeTheme<Color>(DBColor, newTheme);
 
-                //Apply override:
-                Utils.applyWindowFillColorOpacityOverride(newTheme);
                 //Apply theme to other mods too
                 changeThemeOtherMods(newTheme);
                 //Reset cache label sizes if applicable
@@ -958,6 +957,9 @@ namespace aRandomKiwi.RimThemes
 
                 //We require a reloading of the BG
                 Utils.needRefresh = true;
+
+                //Apply override:
+                Utils.applyWindowFillColorOpacityOverride(newTheme);
             }
             catch(Exception e)
             {

@@ -186,6 +186,21 @@ namespace aRandomKiwi.RimThemes
             if (classType == null)
                 return;
 
+            //Change tapestry transparency level
+            if (Themes.DBTexTapestry.ContainsKey(Settings.curTheme))
+            {
+                for (int x = 0; x < Themes.DBTexTapestry[Settings.curTheme].width; x++)
+                {
+                    for (int y = 0; y < Themes.DBTexTapestry[Settings.curTheme].height; y++)
+                    {
+                        Color pxl = Themes.DBTexTapestry[Settings.curTheme].GetPixel(x, y);
+                        pxl.a = Settings.overrideThemeWindowFillColorAlphaLevel;
+                        Themes.DBTexTapestry[Settings.curTheme].SetPixel(x, y, pxl);
+                    }
+                }
+                Themes.DBTexTapestry[Settings.curTheme].Apply();
+            }
+
             Color cColor=Color.black;
 
             //Change of color component filling of the current theme
