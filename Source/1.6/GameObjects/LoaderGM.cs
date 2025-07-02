@@ -461,6 +461,42 @@ namespace aRandomKiwi.RimThemes
                 }
                 Themes.RDBTex.Clear();
             }
+            //Dynamic textures
+            nb = Themes.RDBTexDyn.Count();
+            if (nb != 0)
+            {
+                foreach (var entry in Themes.RDBTexDyn)
+                {
+                    if (!Themes.DBTexDyn.ContainsKey(entry.Key) || Themes.DBTexDyn[entry.Key] == null)
+                        Themes.DBTexDyn[entry.Key] = new Dictionary<string, Dictionary<string, List<Texture2D>>>();
+
+                    foreach (var entry2 in entry.Value)
+                    {
+                            if (!Themes.DBTexDyn[entry.Key].ContainsKey(entry2.Key) || Themes.DBTexDyn[entry.Key][entry2.Key] == null)
+                                Themes.DBTexDyn[entry.Key][entry2.Key] = new Dictionary<string, List<Texture2D>>();
+
+                            foreach (var entry3 in entry2.Value)
+                            {
+                                if (!Themes.DBTexDyn[entry.Key][entry2.Key].ContainsKey(entry3.Key))
+                                    Themes.DBTexDyn[entry.Key][entry2.Key][entry3.Key] = new List<Texture2D>();
+
+                                foreach (var entry4 in entry3.Value)
+                                {
+                                    tex = new Texture2D(196, 196, TextureFormat.ARGB32, false);
+                                    tex.LoadImage(entry4);
+                                    Themes.DBTexDyn[entry.Key][entry2.Key][entry3.Key].Add(tex);
+                                }
+                                //Add solo texture if found (old Rimthemes compat)
+                                if(Themes.DBTex.ContainsKey(entry.Key) && Themes.DBTex[entry.Key].ContainsKey(entry2.Key) && Themes.DBTex[entry.Key][entry2.Key].ContainsKey(entry3.Key))
+                                {
+                                    Themes.DBTexDyn[entry.Key][entry2.Key][entry3.Key].Add(Themes.DBTex[entry.Key][entry2.Key][entry3.Key]);
+                                }
+                            }
+
+                    }
+                }
+                Themes.RDBTexDyn.Clear();
+            }
         }
 
 
@@ -503,6 +539,23 @@ namespace aRandomKiwi.RimThemes
         }
 
 
+        public static string getDynBGLoader(string path)
+        {
+            string dir = Path.GetDirectoryName(path);
+            DirectoryInfo directoryInfo = new DirectoryInfo(dir);
+            IOrderedEnumerable<FileInfo> listLoader = from f in directoryInfo.GetFiles()
+                                                     where f.Name.StartsWith("BGLoader")
+                                                     orderby f.LastWriteTime descending
+                                                     select f;
+
+            if (listLoader.Count() <= 1)
+                return path;
+            else
+            {
+                return listLoader.RandomElement().FullName;
+            }
+        }
+
         /*
          * Routine for obtaining a loader resource
          */
@@ -544,6 +597,9 @@ namespace aRandomKiwi.RimThemes
                 {
                     string path = Utils.currentMod.RootDir + Path.DirectorySeparatorChar
                         + "Themes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
+                    if (rsc == LoaderRSC.BGLoader)
+                        path = getDynBGLoader(path);
+
                     if (!File.Exists(path))
                     {
                         //If applicable, loading the loader by default
@@ -579,6 +635,9 @@ namespace aRandomKiwi.RimThemes
 
                     string path = basePath + Path.DirectorySeparatorChar
                         + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
+
+                    if (rsc == LoaderRSC.BGLoader)
+                        path = getDynBGLoader(path);
 
                     if (!File.Exists(path))
                     {
@@ -629,6 +688,9 @@ namespace aRandomKiwi.RimThemes
                         {
                             //Check if existence Loader.png for the mod
                             string loaderBGPath = cmod.RootDir + Path.DirectorySeparatorChar + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
+
+                            if (rsc == LoaderRSC.BGLoader)
+                                loaderBGPath = getDynBGLoader(loaderBGPath);
                             if (File.Exists(loaderBGPath))
                             {
                                 try

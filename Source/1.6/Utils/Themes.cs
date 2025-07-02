@@ -353,6 +353,7 @@ namespace aRandomKiwi.RimThemes
 
 
                     RDBTex[themeID] = new Dictionary<string, Dictionary<string, byte[]>>();
+                    RDBTexDyn[themeID] = new Dictionary<string, Dictionary<string, List<byte[]>>>();
 
 
                     //Loading theme icon
@@ -428,12 +429,31 @@ namespace aRandomKiwi.RimThemes
                                     else
                                     {
                                         if (!RDBTex[themeID].ContainsKey(tmp[0]) || RDBTex[themeID][tmp[0]] == null)
+                                        {
                                             RDBTex[themeID][tmp[0]] = new Dictionary<string, byte[]>();
+                                            RDBTexDyn[themeID][tmp[0]] = new Dictionary<string, List<byte[]>>();
+                                        }
 
                                         //Attempt to get the property dynamically to verify sound validity
                                         try
                                         {
-                                            RDBTex[themeID][tmp[0]][tmp[1]] = rawBytesLoad(tex);
+                                            if (tmp[1].Contains("@"))
+                                            {
+                                                int index = tmp[1].LastIndexOf("@");
+                                                if (index >= 0)
+                                                    tmp[1] = tmp[1].Substring(0, index);
+
+                                                if (!RDBTexDyn[themeID][tmp[0]].ContainsKey(tmp[1]))
+                                                    RDBTexDyn[themeID][tmp[0]][tmp[1]] = new List<byte[]>();
+
+                                                RDBTexDyn[themeID][tmp[0]][tmp[1]].Add(rawBytesLoad(tex));
+                                                if(!RDBTex[themeID][tmp[0]].ContainsKey(tmp[1]))
+                                                    RDBTex[themeID][tmp[0]][tmp[1]] = null;
+                                            }
+                                            else
+                                            {
+                                                RDBTex[themeID][tmp[0]][tmp[1]] = rawBytesLoad(tex);
+                                            }
                                         }
                                         catch (Exception e)
                                         {
@@ -450,13 +470,27 @@ namespace aRandomKiwi.RimThemes
                     }
 
                     //If available loading the animated background
-                    string animatedPath = dir + Path.DirectorySeparatorChar + "Textures" + Path.DirectorySeparatorChar + "UI_BackgroundMain.BGPlanet.webm";
-                    if (File.Exists(animatedPath))
+                    string animatedPath = dir + Path.DirectorySeparatorChar + "Textures";
+                    DirectoryInfo directoryInfo = new DirectoryInfo(animatedPath);
+                    IOrderedEnumerable<FileInfo> listVids = from f in directoryInfo.GetFiles()
+                                                              where f.Name.StartsWith("UI_BackgroundMain.BGPlanet") && f.Extension == ".webm"
+                                                              orderby f.LastWriteTime descending
+                                                              select f;
+
+                    if (listVids.Count() >= 1)
                     {
                         try
                         {
-                            DBAnimatedBackground[themeID] = animatedPath;
-                            Themes.LogMsg("Found and loading animated background "+ animatedPath);
+                            if (!DBAnimatedBackgroundDyn.ContainsKey(themeID) || DBAnimatedBackgroundDyn[themeID] == null)
+                                DBAnimatedBackgroundDyn[themeID] = new List<string>();
+
+                            foreach (var v in listVids)
+                            {
+                                DBAnimatedBackgroundDyn[themeID].Add(v.FullName);
+                                DBAnimatedBackground[themeID] = v.FullName;
+                                Log.Message(v.FullName);
+                                Themes.LogMsg("Found and loading animated background " + v.FullName);
+                            }
                         }
                         catch(Exception e)
                         {
@@ -883,6 +917,25 @@ namespace aRandomKiwi.RimThemes
                     //Application theme to other mods too
                     changeThemeOtherMods(VanillaThemeID);
                 }
+
+                //shuttfle dyntexs and videos
+                if (DBTexDyn.ContainsKey(newTheme))
+                {
+                    foreach (var d1 in DBTexDyn[newTheme])
+                    {
+                        foreach (var d2 in d1.Value)
+                        {
+                            if (DBTex.ContainsKey(newTheme) && DBTex[newTheme].ContainsKey(d1.Key) && DBTex[newTheme][d1.Key].ContainsKey(d2.Key))
+                                DBTex[newTheme][d1.Key][d2.Key] = d2.Value.RandomElement();
+                        }
+                    }
+                }
+
+                if (DBAnimatedBackgroundDyn.ContainsKey(newTheme))
+                {
+                    DBAnimatedBackground[newTheme] = DBAnimatedBackgroundDyn[newTheme].RandomElement();
+                }
+
                 stopCurrentAnimatedBackground();
                 //Vanilla crush with the new theme
                 changeTheme<Texture2D>(DBTex, newTheme);
@@ -2080,6 +2133,7 @@ namespace aRandomKiwi.RimThemes
         static public Dictionary<string, byte[]> RDBTexLoaderBar = new Dictionary<string, byte[]>();
         static public Dictionary<string, byte[]> RDBTexLoaderText = new Dictionary<string, byte[]>();
         static public Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>> RDBTex = new Dictionary<string, Dictionary<string, Dictionary<string, byte[]>>>();
+        static public Dictionary<string, Dictionary<string, Dictionary<string, List<byte[]>>>> RDBTexDyn = new Dictionary<string, Dictionary<string, Dictionary<string, List<byte[]>>>>();
 
         //Texture dictionaries
         static public Dictionary<string, Texture2D> DBTexThemeIcon = new Dictionary<string, Texture2D>();
@@ -2092,9 +2146,11 @@ namespace aRandomKiwi.RimThemes
         static public Dictionary<string, Texture2D> DBTexLoaderBar = new Dictionary<string, Texture2D>();
         static public Dictionary<string, Texture2D> DBTexLoaderText = new Dictionary<string, Texture2D>();
         static public Dictionary<string, Dictionary<string, Dictionary<string, Texture2D>>> DBTex = new Dictionary<string, Dictionary<string, Dictionary<string, Texture2D>>>();
+        static public Dictionary<string, Dictionary<string, Dictionary<string, List<Texture2D>>>> DBTexDyn = new Dictionary<string, Dictionary<string, Dictionary<string, List<Texture2D>>>>();
 
         //Animated background
         static public Dictionary<string, string> DBAnimatedBackground = new Dictionary<string, string>();
+        static public Dictionary<string, List<string>> DBAnimatedBackgroundDyn = new Dictionary<string, List<string>>();
 
         //Text color by theme
         static public Dictionary<string, Color> DBTextColorWhite = new Dictionary<string, Color>();

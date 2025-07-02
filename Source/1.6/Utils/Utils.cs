@@ -37,23 +37,11 @@ namespace aRandomKiwi.RimThemes
         static public ModContentPack currentMod;
         static public Mod currentModInst;
         static public Settings modSettings;
-        static public string releaseInfo = "RimThemes NX";
+        static public string releaseInfo = "RimThemes NX rev9";
         static public string releaseDesc = "Changes :" + Environment.NewLine
-            + "-Added the name of the current main donor in the themes selection menu" + Environment.NewLine
-            + "-Improved all default themes" + Environment.NewLine
-            + "-Added new setting allowing to adjust all windows opacity level" + Environment.NewLine
-            + "-Added new setting allowing to hide the RimThemes logo in the main menu" + Environment.NewLine
-            + "-Added new settings allowing to hide the main menu expansions icons, info corner and more" + Environment.NewLine
-            + "-Added new setting allowing to hide windows shadows" + Environment.NewLine
-            + "-Added new default theme 'Rim-Life 2' and 'Mechanoid cluster'" + Environment.NewLine
-            + "-Fixed the overlapping issue with the expansions icons buttons (in the bottom left)" + Environment.NewLine
-            + "-Fixed confirm button texture issue (vanilla texture applied instead of the current theme)" + Environment.NewLine
-            + "-Few others minors improvements" + Environment.NewLine + Environment.NewLine
-            + "For themes makers :" + Environment.NewLine
-            + "-Fixed tapestry border color tag bug (color was never applied in themes)" + Environment.NewLine
-            + "-Added support for custom APNG loader FPS with the new tag 'loaderFPS'" + Environment.NewLine
-            + "-Few others new tags (download the Theme example package for more details)" + Environment.NewLine + Environment.NewLine
-            + "/!\\ Notice : Support for 1.0 is dropped, only RimThemes 2020R1 is compatible with Rimworld 1.0." + Environment.NewLine;
+            + "-Added the ability to have random game textures" + Environment.NewLine
+            + "-Added the ability to have random images in the loading screen" + Environment.NewLine + Environment.NewLine
+            + "Note : Check the 'Themes Makers' thread updates on Steam for themers." + Environment.NewLine;
 
         private static Traverse cachedLabelWidthCache = null;
         static private bool initCachedLabelWidthCache = false;
