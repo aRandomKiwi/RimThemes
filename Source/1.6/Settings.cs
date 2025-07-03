@@ -93,7 +93,7 @@ namespace aRandomKiwi.RimThemes
             inRect.yMax -= 15f;
 
             var defaultColumnWidth = (inRect.width - 50);
-            Listing_Standard list = new Listing_Standard() { ColumnWidth = defaultColumnWidth };
+            Listing_Standard list = new Listing_Standard() {  };
 
             //Image logo
             if( Widgets.ButtonImage(new Rect((inRect.width / 2) - 90, inRect.y, 180, 144), Loader.logoTex, Color.white, Color.green))
