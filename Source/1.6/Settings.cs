@@ -57,8 +57,21 @@ namespace aRandomKiwi.RimThemes
         public static int cornerInfoMode = 1;
         public static bool disableDefaultThemes = false;
 
+        public static bool enableCentipedeTheme = true;
+        public static bool enableClassicCassandraTheme = true;
+        public static bool enableCyberpunkTheme = true;
+        public static bool enableMechanoidClusterTheme = true;
+        public static bool enableMuffaloTheme = true;
+        public static bool enablePhoebeChillaxTheme = true;
+        public static bool enableRimLife2Theme = true;
+        public static bool enableScytherTheme = true;
+        public static bool enableSingularityTheme = true;
+        public static bool enableThrumboTheme = true;
+        public static bool enableUSFMTheme = true;
+
 
         public static bool SectionGeneralExpanded = false;
+        public static bool SectionDefaultThemesExpanded = false;
         public static bool SectionOpacityExpanded = false;
         public static bool SectionRandomBgExpanded = false;
         public static bool SectionDialogStackingExpanded = false;
@@ -106,9 +119,6 @@ namespace aRandomKiwi.RimThemes
 
             if (SectionGeneralExpanded)
             {
-
-                list.CheckboxLabeled("RimTheme_SettingsDisableDefaultThemes".Translate(), ref disableDefaultThemes);
-
                 list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
                 list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
                 list.CheckboxLabeled("RimTheme_SettingsDisableWallpaper".Translate(), ref disableWallpaper);
@@ -125,6 +135,41 @@ namespace aRandomKiwi.RimThemes
                 list.CheckboxLabeled("RimTheme_SettingsDisableCustomLoader".Translate(), ref disableCustomLoader);
                 list.CheckboxLabeled("RimTheme_SettingsVerboseLogs".Translate(), ref verboseMode);
                 list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint);
+            }
+
+            if (SectionDefaultThemesExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsDefaultThemesSection".Translate()))
+            {
+                SectionDefaultThemesExpanded = !SectionDefaultThemesExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionDefaultThemesExpanded)
+            {
+                list.CheckboxLabeled("RimTheme_SettingsDisableDefaultThemes".Translate(), ref disableDefaultThemes);
+                if (!disableDefaultThemes)
+                {
+                    list.Gap(25);
+                    list.CheckboxLabeled("Centipede", ref enableCentipedeTheme);
+                    list.CheckboxLabeled("Classic Cassandra", ref enableClassicCassandraTheme);
+                    list.CheckboxLabeled("Cyberpunk", ref enableCyberpunkTheme);
+                    list.CheckboxLabeled("Mechanoid Cluster", ref enableMechanoidClusterTheme);
+                    list.CheckboxLabeled("Muffalo", ref enableMuffaloTheme);
+                    list.CheckboxLabeled("Phoebe Chillax", ref enablePhoebeChillaxTheme);
+                    list.CheckboxLabeled("Rim-Life 2", ref enableRimLife2Theme);
+                    list.CheckboxLabeled("Scyther", ref enableScytherTheme);
+                    list.CheckboxLabeled("Singularity", ref enableSingularityTheme);
+                    list.CheckboxLabeled("Thrumbo", ref enableThrumboTheme);
+                    list.CheckboxLabeled("USFM", ref enableUSFMTheme);
+                }
+                list.GapLine();
+                GUI.color = Color.cyan;
+                list.Label("RimTheme_SettingsDefaultThemesNote".Translate());
+                GUI.color = Color.white;
             }
 
             if (SectionOpacityExpanded)
@@ -522,6 +567,18 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref disableFontFilterModePoint, "disableFontFilterModePoint", true);
             Scribe_Values.Look<string>(ref lastVersionInfo, "lastVersionInfo", "");
             Scribe_Values.Look<bool>(ref disableTinyCustomFont, "disableTinyCustomFont", false);
+
+            Scribe_Values.Look<bool>(ref enableCentipedeTheme, "enableCentipedeTheme", true);
+            Scribe_Values.Look<bool>(ref enableClassicCassandraTheme, "enableClassicCassandraTheme", true);
+            Scribe_Values.Look<bool>(ref enableCyberpunkTheme, "enableCyberpunkTheme", true);
+            Scribe_Values.Look<bool>(ref enableMechanoidClusterTheme, "enableMechanoidClusterTheme", true);
+            Scribe_Values.Look<bool>(ref enableMuffaloTheme, "enableMuffaloTheme", true);
+            Scribe_Values.Look<bool>(ref enablePhoebeChillaxTheme, "enablePhoebeChillaxTheme", true);
+            Scribe_Values.Look<bool>(ref enableRimLife2Theme, "enableRimLife2Theme", true);
+            Scribe_Values.Look<bool>(ref enableScytherTheme, "enableScytherTheme", true);
+            Scribe_Values.Look<bool>(ref enableSingularityTheme, "enableSingularityTheme", true);
+            Scribe_Values.Look<bool>(ref enableThrumboTheme, "enableThrumboTheme", true);
+            Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", true);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

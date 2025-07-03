@@ -599,6 +599,10 @@ namespace aRandomKiwi.RimThemes
             string[] parts = Settings.curTheme.Split('§');
             if (parts[0] == "-1" && !Settings.disableDefaultThemes)
             {
+                if( !Utils.isDefaultThemeAllowed(parts[1]))
+                {
+                    return defaultTex;
+                }
                 //Loader not loaded we try to load it
                 if (!db.ContainsKey(Settings.curTheme))
                 {

@@ -40,6 +40,9 @@
 	<RimTheme_SettingsMenuRTLogo>RimThemes logo on the main menu</RimTheme_SettingsMenuRTLogo>
 	<RimTheme_SettingsMenuRTLogoHide>Hide</RimTheme_SettingsMenuRTLogoHide>
 	<RimTheme_SettingsMenuRTLogoShow>Show</RimTheme_SettingsMenuRTLogoShow>
+	<RimTheme_SettingsDefaultThemesSection>Default themes</RimTheme_SettingsDefaultThemesSection>
+	<RimTheme_SettingsDisableDefaultThemes>Disable RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
+	<RimTheme_SettingsDefaultThemesNote>Note : Disabling or re-enabling one or all themes will only take effect when the game is restarted.</RimTheme_SettingsDefaultThemesNote>
 	
 	<RimTheme_SettingsDeterminedByTheme>Determined by the current theme</RimTheme_SettingsDeterminedByTheme>
 	
@@ -50,7 +53,6 @@
 	<RimTheme_SettingsWindowAnimationSlideRight>Slide right</RimTheme_SettingsWindowAnimationSlideRight>
 	<RimTheme_SettingsWindowAnimationSlideTop>Slide top</RimTheme_SettingsWindowAnimationSlideTop>
 	<RimTheme_SettingsWindowAnimationSlideBottom>Slide bottom</RimTheme_SettingsWindowAnimationSlideBottom>
-	<RimTheme_SettingsDisableDefaultThemes>Disable RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
 	
 	<RimThemes_CatFuture>Future</RimThemes_CatFuture>
 	<RimThemes_CatMedieval>Medieval</RimThemes_CatMedieval>

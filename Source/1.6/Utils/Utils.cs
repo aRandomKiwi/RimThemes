@@ -154,6 +154,25 @@ namespace aRandomKiwi.RimThemes
                 return false;
         }
 
+        static public bool isDefaultThemeAllowed(string theme)
+        {
+            if(theme == "Centipede" && Settings.enableCentipedeTheme
+                    || theme == "Classic Cassandra" && Settings.enableClassicCassandraTheme
+                    || theme == "Cyberpunk" && Settings.enableCyberpunkTheme
+                    || theme == "Mechanoid Cluster" && Settings.enableMechanoidClusterTheme
+                    || theme == "Muffalo" && Settings.enableMuffaloTheme
+                    || theme == "Phoebe Chillax" && Settings.enablePhoebeChillaxTheme
+                    || theme == "Rim-Life 2" && Settings.enableRimLife2Theme
+                    || theme == "Scyther" && Settings.enableScytherTheme
+                    || theme == "Singularity" && Settings.enableSingularityTheme
+                    || theme == "CentThrumboipede" && Settings.enableThrumboTheme
+                    || theme == "USFM" && Settings.enableUSFMTheme)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         static public bool isNSBlacklistedWindowsType(Window win)
         {

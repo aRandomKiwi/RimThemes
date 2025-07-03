@@ -40,6 +40,9 @@
 	<RimTheme_SettingsMenuRTLogo>Logo RimThemes sur l'écran principal</RimTheme_SettingsMenuRTLogo>
 	<RimTheme_SettingsMenuRTLogoHide>Masquer</RimTheme_SettingsMenuRTLogoHide>
 	<RimTheme_SettingsMenuRTLogoShow>Afficher</RimTheme_SettingsMenuRTLogoShow>
+	<RimTheme_SettingsDefaultThemesSection>Thèmes par défaut</RimTheme_SettingsDefaultThemesSection>
+	<RimTheme_SettingsDisableDefaultThemes>Désactiver les thèmes par défaut de RimThemes (nécessite un redémarrage du jeux)</RimTheme_SettingsDisableDefaultThemes>
+	<RimTheme_SettingsDefaultThemesNote>La désactivation ou ré-activation d'un ou de tous les thémes ne prendra effet qu'au redémarrage du jeux.</RimTheme_SettingsDefaultThemesNote>
 	
 	<RimTheme_SettingsDeterminedByTheme>Déterminé par le thème activé</RimTheme_SettingsDeterminedByTheme>
 	
@@ -50,7 +53,6 @@
 	<RimTheme_SettingsWindowAnimationSlideRight>Translation vers la droite</RimTheme_SettingsWindowAnimationSlideRight>
 	<RimTheme_SettingsWindowAnimationSlideTop>Translation vers le haut</RimTheme_SettingsWindowAnimationSlideTop>
 	<RimTheme_SettingsWindowAnimationSlideBottom>Translation vers le bas</RimTheme_SettingsWindowAnimationSlideBottom>
-	<RimTheme_SettingsDisableDefaultThemes>Désactiver les thèmes par défaut de RimThemes (nécessite un redémarrage du jeux)</RimTheme_SettingsDisableDefaultThemes>
 	
 	<RimThemes_CatFuture>Futur</RimThemes_CatFuture>
 	<RimThemes_CatMedieval>Médiéval</RimThemes_CatMedieval>

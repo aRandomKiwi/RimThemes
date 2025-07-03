@@ -258,6 +258,12 @@ namespace aRandomKiwi.RimThemes
                     {
                         loadThemesInFolder("-1", themesDir, true);
                     }
+                    else
+                    {
+                        if (Settings.curTheme.StartsWith("-1§"))
+                            Settings.curTheme = Themes.VanillaThemeID;
+                        LogMsg("Skip all default themes : disabled in user's settings");
+                    }
             }
             catch(Exception e)
             {
@@ -346,6 +352,14 @@ namespace aRandomKiwi.RimThemes
                 {
                     var theme = dir.Remove(0, dir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                     string themeID = modID + "§" + theme;
+
+                    if (modID == "-1" && !Utils.isDefaultThemeAllowed(theme))
+                    {
+                        if(Settings.curTheme == themeID)
+                            Settings.curTheme = Themes.VanillaThemeID;
+                        LogMsg("Skip default theme '" + theme+"' : disabled in user's settings");
+                        continue;
+                    }
 
                     fullPathRoot = themesDir + Path.DirectorySeparatorChar + theme + Path.DirectorySeparatorChar;
 
