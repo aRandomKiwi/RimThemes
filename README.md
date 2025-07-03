@@ -4,11 +4,11 @@
 
 <p align="center">
 	<a href="https://github.com/aRandomKiwi/RimThemes/releases">
-		<img src="https://img.shields.io/badge/release-NX rev8-4BC51D.svg?style=flat" alt="NX rev8" />
+		<img src="https://img.shields.io/badge/release-NX rev10-4BC51D.svg?style=flat" alt="NX rev10" />
     </a>
 	<img src="https://img.shields.io/github/downloads-pre/aRandomKiwi/RimThemes/total.svg?style=popout-square&color=green" alt="Github Total Downloads" />
 	<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1668983184">
-		<img src="https://img.shields.io/badge/RimWorld-1.5-purple.svg?longCache=true&style=plastic)" alt="Compatible Rimworld 1.5" />
+		<img src="https://img.shields.io/badge/RimWorld-1.6-purple.svg?longCache=true&style=plastic)" alt="Compatible Rimworld 1.6" />
     </a>
 	<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=1668983184">
 		<img src="https://img.shields.io/badge/documentation-%F0%9F%94%8D-blue?style=flat" />
@@ -55,7 +55,7 @@ Then simply create a "RimThemes" folder in the Rimworld's base directory (ex : "
 
 ## Important
 
-Need to be loaded in first position in mod list ! 9 themes included
+Need to be loaded in first position in mod list ! 9 themes included but 3 enabled by default
 <p align="left">
     <img src="https://i.imgur.com/pKxfc6F.png" alt="RimThemes" />
 </p>
