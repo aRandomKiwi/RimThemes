@@ -45,6 +45,7 @@ namespace aRandomKiwi.RimThemes
             + "-Improved settings menu accessibility UI" + Environment.NewLine + Environment.NewLine
             + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine + Environment.NewLine
             + "-Added the ability for themes to hide the translations infos dialog (determined by the theme by default)" + Environment.NewLine + Environment.NewLine
+            + "-Improved readability of certain default themes" + Environment.NewLine + Environment.NewLine
             + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine + Environment.NewLine
             + "Note : Check the 'Themes Makers' thread updates on Steam for themers." + Environment.NewLine;
 
