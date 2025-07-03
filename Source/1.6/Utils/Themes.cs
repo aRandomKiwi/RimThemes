@@ -369,7 +369,6 @@ namespace aRandomKiwi.RimThemes
 
 
                     RDBTex[themeID] = new Dictionary<string, Dictionary<string, byte[]>>();
-                    RDBTexDyn[themeID] = new Dictionary<string, Dictionary<string, List<byte[]>>>();
 
 
                     //Loading theme icon
@@ -447,7 +446,6 @@ namespace aRandomKiwi.RimThemes
                                         if (!RDBTex[themeID].ContainsKey(tmp[0]) || RDBTex[themeID][tmp[0]] == null)
                                         {
                                             RDBTex[themeID][tmp[0]] = new Dictionary<string, byte[]>();
-                                            RDBTexDyn[themeID][tmp[0]] = new Dictionary<string, List<byte[]>>();
                                         }
 
                                         //Attempt to get the property dynamically to verify sound validity
@@ -458,6 +456,12 @@ namespace aRandomKiwi.RimThemes
                                                 int index = tmp[1].LastIndexOf("@");
                                                 if (index >= 0)
                                                     tmp[1] = tmp[1].Substring(0, index);
+
+                                                if(!RDBTexDyn.ContainsKey(themeID))
+                                                    RDBTexDyn[themeID] = new Dictionary<string, Dictionary<string, List<byte[]>>>();
+
+                                                if(!RDBTexDyn[themeID].ContainsKey(tmp[0]))
+                                                    RDBTexDyn[themeID][tmp[0]] = new Dictionary<string, List<byte[]>>();
 
                                                 if (!RDBTexDyn[themeID][tmp[0]].ContainsKey(tmp[1]))
                                                     RDBTexDyn[themeID][tmp[0]][tmp[1]] = new List<byte[]>();

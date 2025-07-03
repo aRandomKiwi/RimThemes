@@ -53,7 +53,7 @@ namespace aRandomKiwi.RimThemes
                         float num2 = (float)UI.screenWidth * (BGPlanetSize.y / BGPlanetSize.x);
                         position = new Rect(0f, (float)(UI.screenHeight / 2) - num2 / 2f, width, num2);
                     }
-                    GUI.DrawTexture(position, getThemeRscLoader(LoaderRSC.BGLoader), ScaleMode.StretchToFill);
+                    GUI.DrawTexture(position, getThemeRscLoader(LoaderRSC.BGLoader), ScaleMode.ScaleToFit);
 
 
                     //Widgets.DrawRectFast(new Rect(0, 0, UI.screenWidth, UI.screenHeight), Color.black);

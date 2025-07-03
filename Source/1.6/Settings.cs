@@ -59,16 +59,16 @@ namespace aRandomKiwi.RimThemes
         public static bool disableDefaultThemes = false;
 
         public static bool enableCentipedeTheme = true;
-        public static bool enableClassicCassandraTheme = true;
         public static bool enableCyberpunkTheme = true;
-        public static bool enableMechanoidClusterTheme = true;
-        public static bool enableMuffaloTheme = true;
-        public static bool enablePhoebeChillaxTheme = true;
-        public static bool enableRimLife2Theme = true;
-        public static bool enableScytherTheme = true;
-        public static bool enableSingularityTheme = true;
         public static bool enableThrumboTheme = true;
-        public static bool enableUSFMTheme = true;
+        public static bool enableScytherTheme = false;
+        public static bool enableClassicCassandraTheme = false;
+        public static bool enableMechanoidClusterTheme = false;
+        public static bool enableMuffaloTheme = false;
+        public static bool enablePhoebeChillaxTheme = false;
+        public static bool enableRimLife2Theme = false;
+        public static bool enableSingularityTheme = false;
+        public static bool enableUSFMTheme = false;
 
 
         public static bool SectionGeneralExpanded = false;
@@ -157,15 +157,15 @@ namespace aRandomKiwi.RimThemes
                 {
                     list.Gap(25);
                     list.CheckboxLabeled("Centipede", ref enableCentipedeTheme);
-                    list.CheckboxLabeled("Classic Cassandra", ref enableClassicCassandraTheme);
                     list.CheckboxLabeled("Cyberpunk", ref enableCyberpunkTheme);
+                    list.CheckboxLabeled("Scyther", ref enableScytherTheme);
+                    list.CheckboxLabeled("Thrumbo", ref enableThrumboTheme);
+                    list.CheckboxLabeled("Classic Cassandra", ref enableClassicCassandraTheme);
                     list.CheckboxLabeled("Mechanoid Cluster", ref enableMechanoidClusterTheme);
                     list.CheckboxLabeled("Muffalo", ref enableMuffaloTheme);
                     list.CheckboxLabeled("Phoebe Chillax", ref enablePhoebeChillaxTheme);
                     list.CheckboxLabeled("Rim-Life 2", ref enableRimLife2Theme);
-                    list.CheckboxLabeled("Scyther", ref enableScytherTheme);
                     list.CheckboxLabeled("Singularity", ref enableSingularityTheme);
-                    list.CheckboxLabeled("Thrumbo", ref enableThrumboTheme);
                     list.CheckboxLabeled("USFM", ref enableUSFMTheme);
                 }
                 list.GapLine();
@@ -594,16 +594,16 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref disableTinyCustomFont, "disableTinyCustomFont", false);
 
             Scribe_Values.Look<bool>(ref enableCentipedeTheme, "enableCentipedeTheme", true);
-            Scribe_Values.Look<bool>(ref enableClassicCassandraTheme, "enableClassicCassandraTheme", true);
+            Scribe_Values.Look<bool>(ref enableClassicCassandraTheme, "enableClassicCassandraTheme", false);
             Scribe_Values.Look<bool>(ref enableCyberpunkTheme, "enableCyberpunkTheme", true);
-            Scribe_Values.Look<bool>(ref enableMechanoidClusterTheme, "enableMechanoidClusterTheme", true);
-            Scribe_Values.Look<bool>(ref enableMuffaloTheme, "enableMuffaloTheme", true);
-            Scribe_Values.Look<bool>(ref enablePhoebeChillaxTheme, "enablePhoebeChillaxTheme", true);
-            Scribe_Values.Look<bool>(ref enableRimLife2Theme, "enableRimLife2Theme", true);
-            Scribe_Values.Look<bool>(ref enableScytherTheme, "enableScytherTheme", true);
-            Scribe_Values.Look<bool>(ref enableSingularityTheme, "enableSingularityTheme", true);
+            Scribe_Values.Look<bool>(ref enableMechanoidClusterTheme, "enableMechanoidClusterTheme", false);
+            Scribe_Values.Look<bool>(ref enableMuffaloTheme, "enableMuffaloTheme", false);
+            Scribe_Values.Look<bool>(ref enablePhoebeChillaxTheme, "enablePhoebeChillaxTheme", false);
+            Scribe_Values.Look<bool>(ref enableRimLife2Theme, "enableRimLife2Theme", false);
+            Scribe_Values.Look<bool>(ref enableScytherTheme, "enableScytherTheme", false);
+            Scribe_Values.Look<bool>(ref enableSingularityTheme, "enableSingularityTheme", false);
             Scribe_Values.Look<bool>(ref enableThrumboTheme, "enableThrumboTheme", true);
-            Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", true);
+            Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", false);
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

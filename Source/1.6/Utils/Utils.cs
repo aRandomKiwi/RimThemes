@@ -37,14 +37,15 @@ namespace aRandomKiwi.RimThemes
         static public ModContentPack currentMod;
         static public Mod currentModInst;
         static public Settings modSettings;
-        static public string releaseInfo = "RimThemes NX rev9";
-        static public string releaseDesc = "Changes :" + Environment.NewLine
-            + "-Added the ability to disable all defaults themes (or specific ones), to reduce Rimthemes memory footprint" + Environment.NewLine
-            + "-Added the ability to have multiple random game textures" + Environment.NewLine
-            + "-Improved settings menu accessibility UI" + Environment.NewLine
-            + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine
-            + "-Added the ability for themes to hide the translations infos" + Environment.NewLine
-            + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine
+        static public string releaseInfo = "RimThemes NX rev10";
+        static public string releaseDesc =
+            "-Added the ability to disable all defaults themes (or specific ones), to reduce Rimthemes memory footprint" + Environment.NewLine + Environment.NewLine
+            + "-Only 3 default themes are enabled by default" + Environment.NewLine + Environment.NewLine
+            + "-Added the ability to have multiple random game textures" + Environment.NewLine + Environment.NewLine
+            + "-Improved settings menu accessibility UI" + Environment.NewLine + Environment.NewLine
+            + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine + Environment.NewLine
+            + "-Added the ability for themes to hide the translations infos dialog (determined by the theme by default)" + Environment.NewLine + Environment.NewLine
+            + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine + Environment.NewLine
             + "Note : Check the 'Themes Makers' thread updates on Steam for themers." + Environment.NewLine;
 
         private static Traverse cachedLabelWidthCache = null;
@@ -169,7 +170,7 @@ namespace aRandomKiwi.RimThemes
                     || theme == "Rim-Life 2" && Settings.enableRimLife2Theme
                     || theme == "Scyther" && Settings.enableScytherTheme
                     || theme == "Singularity" && Settings.enableSingularityTheme
-                    || theme == "CentThrumboipede" && Settings.enableThrumboTheme
+                    || theme == "Thrumbo" && Settings.enableThrumboTheme
                     || theme == "USFM" && Settings.enableUSFMTheme)
             {
                 return true;
