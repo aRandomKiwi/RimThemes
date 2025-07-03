@@ -1961,6 +1961,34 @@ namespace aRandomKiwi.RimThemes
             return ret;
         }
 
+        /*
+        * Obtaining the applicable translations infos display mode according to the theme (by default yes)
+        */
+        public static bool translationsInfos()
+        {
+            bool ret;
+            //Application determined by the current theme
+            if (Settings.translationCreditsIconsMode == 3)
+            {
+                string iret = Themes.getText("translationsinfos");
+                if (iret == null)
+                    ret = true;
+                else if (iret == "true")
+                    ret = true;
+                else
+                    ret = false;
+            }
+            else
+            {
+                if (Settings.translationCreditsIconsMode == 2)
+                    ret = false;
+                else
+                    ret = true;
+            }
+
+            return ret;
+        }
+
 
         /*
          * Obtaining the window opening animation to perform

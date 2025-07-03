@@ -39,8 +39,12 @@ namespace aRandomKiwi.RimThemes
         static public Settings modSettings;
         static public string releaseInfo = "RimThemes NX rev9";
         static public string releaseDesc = "Changes :" + Environment.NewLine
-            + "-Added the ability to have random game textures" + Environment.NewLine
-            + "-Added the ability to have random images in the loading screen" + Environment.NewLine + Environment.NewLine
+            + "-Added the ability to disable all defaults themes (or specific ones), to reduce Rimthemes memory footprint" + Environment.NewLine
+            + "-Added the ability to have multiple random game textures" + Environment.NewLine
+            + "-Improved settings menu accessibility UI" + Environment.NewLine
+            + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine
+            + "-Added the ability for themes to hide the translations infos" + Environment.NewLine
+            + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine
             + "Note : Check the 'Themes Makers' thread updates on Steam for themers." + Environment.NewLine;
 
         private static Traverse cachedLabelWidthCache = null;

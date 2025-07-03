@@ -7,6 +7,7 @@
 	<RimTheme_BecomeASponsor>Devenez le nouveau donateur principal de RimThemes !</RimTheme_BecomeASponsor>
 	<RimTheme_SettingsWindowsShadow>Ombrage des fenêtres</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Icônes d'extensions Rimworld</RimTheme_SettingsExpansionsIcons>
+	<RimTheme_SettingsTranslationsCredits>Infos des traductions</RimTheme_SettingsTranslationsCredits>
 	<RimTheme_SettingsAlphaSection>Niveau d'opacité</RimTheme_SettingsAlphaSection>
 	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Ne pas forcer le niveau d'opacité des fenêtres</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>Niveau d'opacité de la fenêtre : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
@@ -41,7 +42,7 @@
 	<RimTheme_SettingsMenuRTLogoHide>Masquer</RimTheme_SettingsMenuRTLogoHide>
 	<RimTheme_SettingsMenuRTLogoShow>Afficher</RimTheme_SettingsMenuRTLogoShow>
 	<RimTheme_SettingsDefaultThemesSection>Thèmes par défaut</RimTheme_SettingsDefaultThemesSection>
-	<RimTheme_SettingsDisableDefaultThemes>Désactiver les thèmes par défaut de RimThemes (nécessite un redémarrage du jeux)</RimTheme_SettingsDisableDefaultThemes>
+	<RimTheme_SettingsDisableDefaultThemes>Désactiver tous les thèmes par défaut de RimThemes (nécessite un redémarrage du jeux)</RimTheme_SettingsDisableDefaultThemes>
 	<RimTheme_SettingsDefaultThemesNote>La désactivation ou ré-activation d'un ou de tous les thémes ne prendra effet qu'au redémarrage du jeux.</RimTheme_SettingsDefaultThemesNote>
 	
 	<RimTheme_SettingsDeterminedByTheme>Déterminé par le thème activé</RimTheme_SettingsDeterminedByTheme>

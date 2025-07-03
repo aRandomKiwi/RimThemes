@@ -145,7 +145,9 @@ namespace aRandomKiwi.RimThemes
                 else
                     outRect2 = new Rect(8f, 100f, 300f, 400f);
 
-                MainMenuDrawer.DoTranslationInfoRect(outRect2);
+                if(Themes.translationsInfos())
+                    MainMenuDrawer.DoTranslationInfoRect(outRect2);
+
                 if(Themes.expansionsIcons())
                     MainMenuDrawer.DoExpansionIcons();
 

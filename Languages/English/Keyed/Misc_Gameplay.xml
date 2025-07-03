@@ -7,6 +7,7 @@
 	<RimTheme_BecomeASponsor>Become the new RimThemes main donor !</RimTheme_BecomeASponsor>
 	<RimTheme_SettingsWindowsShadow>Windows shadow</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Rimworld expansions icons</RimTheme_SettingsExpansionsIcons>
+	<RimTheme_SettingsTranslationsCredits>Translations Infos</RimTheme_SettingsTranslationsCredits>
 	<RimTheme_SettingsAlphaSection>Opacity level</RimTheme_SettingsAlphaSection>
 	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Do not override windows opacity level</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>Windows opacity level : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
@@ -41,7 +42,7 @@
 	<RimTheme_SettingsMenuRTLogoHide>Hide</RimTheme_SettingsMenuRTLogoHide>
 	<RimTheme_SettingsMenuRTLogoShow>Show</RimTheme_SettingsMenuRTLogoShow>
 	<RimTheme_SettingsDefaultThemesSection>Default themes</RimTheme_SettingsDefaultThemesSection>
-	<RimTheme_SettingsDisableDefaultThemes>Disable RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
+	<RimTheme_SettingsDisableDefaultThemes>Disable all RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
 	<RimTheme_SettingsDefaultThemesNote>Note : Disabling or re-enabling one or all themes will only take effect when the game is restarted.</RimTheme_SettingsDefaultThemesNote>
 	
 	<RimTheme_SettingsDeterminedByTheme>Determined by the current theme</RimTheme_SettingsDeterminedByTheme>

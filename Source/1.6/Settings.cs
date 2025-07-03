@@ -44,6 +44,7 @@ namespace aRandomKiwi.RimThemes
         public static bool disableFontFilterModePoint = true;
         public static bool disableTinyCustomFont = false;
         public static int expansionsIconsMode = 3;
+        public static int translationCreditsIconsMode = 3;
 
         public static bool disableTinyCustomFontPrev = false;
         public static bool disableCustomSongsPrev = false;
@@ -80,6 +81,7 @@ namespace aRandomKiwi.RimThemes
         public static bool SectionRimThemesLogoExpanded = false;
         public static bool SectionWindowShadowExpanded = false;
         public static bool SectionExtensionIconExpanded = false;
+        public static bool SectionTranslationCreditsExpanded = false;
         public static bool SectionLudeonLogoExpanded = false;
         public static bool SectionInfosExpanded = false;
 
@@ -134,7 +136,7 @@ namespace aRandomKiwi.RimThemes
                 list.CheckboxLabeled("RimTheme_SettingsHideLoadingText".Translate(), ref hideLoadingText);
                 list.CheckboxLabeled("RimTheme_SettingsDisableCustomLoader".Translate(), ref disableCustomLoader);
                 list.CheckboxLabeled("RimTheme_SettingsVerboseLogs".Translate(), ref verboseMode);
-                list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint);
+                list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint, null, 30);
             }
 
             if (SectionDefaultThemesExpanded)
@@ -373,6 +375,28 @@ namespace aRandomKiwi.RimThemes
                     expansionsIconsMode = 3;
             }
 
+            if (SectionTranslationCreditsExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsTranslationsCredits".Translate()))
+            {
+                SectionTranslationCreditsExpanded = !SectionTranslationCreditsExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionTranslationCreditsExpanded)
+            {
+
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoShow".Translate(), (translationCreditsIconsMode == 1)))
+                    translationCreditsIconsMode = 1;
+                if (list.RadioButton("RimTheme_SettingsMenuRTLogoHide".Translate(), (translationCreditsIconsMode == 2)))
+                    translationCreditsIconsMode = 2;
+                if (list.RadioButton("RimTheme_SettingsDeterminedByTheme".Translate(), (translationCreditsIconsMode == 3)))
+                    translationCreditsIconsMode = 3;
+            }
+
             if (SectionLudeonLogoExpanded)
                 GUI.color = Color.gray;
             else
@@ -543,6 +567,7 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<int>(ref rimthemesLogoMode, "rimthemesLogoMode", 3);
             Scribe_Values.Look<int>(ref windowsShadowMode, "windowsShadowMode", 3);
             Scribe_Values.Look<int>(ref expansionsIconsMode, "expansionsIconsMode", 3);
+            Scribe_Values.Look<int>(ref translationCreditsIconsMode, "translationCreditsIconsMode", 3);
             Scribe_Values.Look<string>(ref curTheme, "curTheme", "-1§Vanilla");
             Scribe_Values.Look<bool>(ref disableWallpaper, "disableWallpaper", false);
             Scribe_Values.Look<bool>(ref disableCustomFonts, "disableCustomFonts", false);
