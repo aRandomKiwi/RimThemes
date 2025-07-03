@@ -54,9 +54,8 @@ namespace aRandomKiwi.RimThemes
 
                     //Sponsor Rimtheme info
                     GUI.color = new Color(1f, 1f, 1f, 0.5f);
-                    string spText = "RimTheme_SponsorInfo".Translate(Utils.sponsor);
-                    Rect spRect = new Rect(10f, 73f, 330f, Text.CalcHeight(spText, 330f));
-                    Widgets.Label(spRect, spText);
+                    Rect spRect = new Rect(10f, 73f, 330f, Text.CalcHeight(Utils.releaseInfo, 330f));
+                    Widgets.Label(spRect, Utils.releaseInfo);
                     GUI.color = Color.white;
                     Utils.tempDisableDynColor = false;
                     Utils.tempDisableNoTransparentText = false;

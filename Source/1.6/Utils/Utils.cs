@@ -39,15 +39,15 @@ namespace aRandomKiwi.RimThemes
         static public Settings modSettings;
         static public string releaseInfo = "RimThemes NX rev10";
         static public string releaseDesc =
-            "-Added the ability to disable all defaults themes (or specific ones), to reduce Rimthemes memory footprint" + Environment.NewLine + Environment.NewLine
-            + "-Only 3 default themes are enabled by default" + Environment.NewLine + Environment.NewLine
+            "-Added the ability to disable all defaults themes (or specific ones), allowing to significantly reduce RimThemes memory footprint" + Environment.NewLine + Environment.NewLine
+            + "-Only 3 default themes are enabled by default (RimThemes memory consumption reduced by 40% on average)" + Environment.NewLine + Environment.NewLine
             + "-Added the ability to have multiple random game textures" + Environment.NewLine + Environment.NewLine
             + "-Improved settings menu accessibility UI" + Environment.NewLine + Environment.NewLine
             + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine + Environment.NewLine
             + "-Added the ability for themes to hide the translations infos dialog (determined by the theme by default)" + Environment.NewLine + Environment.NewLine
             + "-Improved readability of certain default themes" + Environment.NewLine + Environment.NewLine
             + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine + Environment.NewLine
-            + "Note : Check the 'Themes Makers' thread updates on Steam for themers." + Environment.NewLine;
+            + "Note : For Themers the 'Example Theme' has been updated, check the 'Themes Makers' thread on Steam." + Environment.NewLine;
 
         private static Traverse cachedLabelWidthCache = null;
         static private bool initCachedLabelWidthCache = false;
