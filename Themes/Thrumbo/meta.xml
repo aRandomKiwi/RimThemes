@@ -12,6 +12,7 @@
   <description>Shouldn't have attacked that Thrumbo !!</description>
   <category>nature</category>
   <dialogStacking>true</dialogStacking>
+  <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(101,50,136)</GenUI.MouseoverColor>
   <Widgets.WindowBGFillColor>(31,0,61)</Widgets.WindowBGFillColor>

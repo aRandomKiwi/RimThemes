@@ -9,6 +9,7 @@
   <menuAlignment>right</menuAlignment>
   <expansionsIcons>false</expansionsIcons>
   <windowsShadow>false</windowsShadow>
+  <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(101,167,136)</GenUI.MouseoverColor>
   <GenUI.SubtleMouseoverColor>(101,167,136)</GenUI.SubtleMouseoverColor>

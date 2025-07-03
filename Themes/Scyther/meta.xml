@@ -7,8 +7,9 @@
   <customFontSizeSmallDefault>12</customFontSizeSmallDefault>
   <customFontSizeMediumDefault>16</customFontSizeMediumDefault>
   <dialogStacking>false</dialogStacking>
-	<windowsShadow>false</windowsShadow>
+  <windowsShadow>false</windowsShadow>
   
+  <translationsInfos>false</translationsInfos>
   <particleMode>mono</particleMode>
   <description>Mechanoids for dummies</description>
   <category>future</category>

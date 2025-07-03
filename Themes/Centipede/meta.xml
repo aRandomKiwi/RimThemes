@@ -7,6 +7,7 @@
   <customFontSizeSmallDefault>12</customFontSizeSmallDefault>
   <customFontSizeMediumDefault>16</customFontSizeMediumDefault>
   
+  <translationsInfos>false</translationsInfos>
   <particleMode>mono</particleMode>
   <windowAnim>clip</windowAnim>
   <description>Muffalo's best friend !</description>

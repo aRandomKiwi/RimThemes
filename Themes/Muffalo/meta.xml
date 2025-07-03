@@ -13,6 +13,7 @@
   <category>future</category>
   <dialogStacking>false</dialogStacking>
   <windowsShadow>false</windowsShadow>
+  <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(44,67,112)</GenUI.MouseoverColor>
   <Widgets.WindowBGFillColor>(29,45,73,90)</Widgets.WindowBGFillColor>

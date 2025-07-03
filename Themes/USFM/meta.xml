@@ -17,6 +17,7 @@
   <windowsShadow>false</windowsShadow>
   <tapestryScaleMode>ScaleAndCrop</tapestryScaleMode>
   <disableTransparentText>1</disableTransparentText>
+  <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(60,60,60)</GenUI.MouseoverColor>
   <Widgets.WindowBGFillColor>(40,40,40,145)</Widgets.WindowBGFillColor>
