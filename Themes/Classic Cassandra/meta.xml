@@ -15,21 +15,21 @@
   <windowsShadow>false</windowsShadow>
   
   <GenUI.MouseoverColor>(101,50,136)</GenUI.MouseoverColor>
-  <Widgets.WindowBGFillColor>(41,30,45,175)</Widgets.WindowBGFillColor>
+  <Widgets.WindowBGFillColor>(41,30,45,200)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(150,112,168)</Widgets.WindowBGBorderColor>
   
-  <Widgets.TutorWindowBGFillColor>(0, 74, 127,135)</Widgets.TutorWindowBGFillColor>>
-  <Widgets.TutorWindowBGBorderColor>(0, 148, 255,175)</Widgets.TutorWindowBGBorderColor>
+  <Widgets.TutorWindowBGFillColor>(0, 74, 127,200)</Widgets.TutorWindowBGFillColor>>
+  <Widgets.TutorWindowBGBorderColor>(0, 148, 255,200)</Widgets.TutorWindowBGBorderColor>
   
-  <Widgets.MenuSectionBGFillColor>(41,30,45,175)</Widgets.MenuSectionBGFillColor>
-  <Widgets.MenuSectionBGBorderColor>(150,112,168,175)</Widgets.MenuSectionBGBorderColor>
+  <Widgets.MenuSectionBGFillColor>(41,30,45,200)</Widgets.MenuSectionBGFillColor>
+  <Widgets.MenuSectionBGBorderColor>(150,112,168,200)</Widgets.MenuSectionBGBorderColor>
   
-  <Widgets.OptionUnselectedBGFillColor>(41,30,45,175)</Widgets.OptionUnselectedBGFillColor>
-  <Widgets.OptionSelectedBGFillColor>(81,70,85,175)</Widgets.OptionSelectedBGFillColor>
+  <Widgets.OptionUnselectedBGFillColor>(41,30,45,200)</Widgets.OptionUnselectedBGFillColor>
+  <Widgets.OptionSelectedBGFillColor>(81,70,85,200)</Widgets.OptionSelectedBGFillColor>
   <Widgets.optionTextActiveColor>(255,255,255)</Widgets.optionTextActiveColor>
   
   <FloatMenuOption.ColorTextDisabled>(229,229,229)</FloatMenuOption.ColorTextDisabled>
-  <FloatMenuOption.ColorBGDisabled>(131,120,135,175)</FloatMenuOption.ColorBGDisabled>
-  <FloatMenuOption.ColorBGActiveMouseover>(81,70,85,139)</FloatMenuOption.ColorBGActiveMouseover>
-  <FloatMenuOption.ColorBGActive>(41,30,45,175)</FloatMenuOption.ColorBGActive>
+  <FloatMenuOption.ColorBGDisabled>(131,120,135,200)</FloatMenuOption.ColorBGDisabled>
+  <FloatMenuOption.ColorBGActiveMouseover>(81,70,85,200)</FloatMenuOption.ColorBGActiveMouseover>
+  <FloatMenuOption.ColorBGActive>(41,30,45,200)</FloatMenuOption.ColorBGActive>
 </RimTheme>

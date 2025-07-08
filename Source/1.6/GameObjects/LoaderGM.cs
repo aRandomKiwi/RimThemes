@@ -11,25 +11,26 @@ using Verse.Steam;
 using Verse;
 using HarmonyLib;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Video;
+using Object = UnityEngine.Object;
+using Random = System.Random;
 
 namespace aRandomKiwi.RimThemes
 {
     public class LoaderGM : MonoBehaviour
     {
-        public virtual void Start()
-        {
-           
-        }
-
         public void OnGUI()
         {
             try
             {
                 //If applicable, loading the loader by default
                 if (Loader.tex[0] == null)
+                {
                     Loader.initTextures();
+                }
 
-                if (LongEventHandler.AnyEventNowOrWaiting && !Settings.disableCustomLoader && !autosave)
+                if (LongEventHandler.ShouldWaitForEvent && !Settings.disableCustomLoader && (LongEventHandler.ShouldWaitForEvent || !autosave))
                 {
                     GUI.depth = 0;
                     UI.ApplyUIScale();
@@ -53,8 +54,90 @@ namespace aRandomKiwi.RimThemes
                         float num2 = (float)UI.screenWidth * (BGPlanetSize.y / BGPlanetSize.x);
                         position = new Rect(0f, (float)(UI.screenHeight / 2) - num2 / 2f, width, num2);
                     }
-                    GUI.DrawTexture(position, getThemeRscLoader(LoaderRSC.BGLoader), ScaleMode.ScaleToFit);
 
+                    if (videoBg == null && picBgTex == null)
+                    {
+                        string videoBackground = null;
+                        Texture2D tex = null;
+                        bool isDefaultVid = false;
+                        bool isDefaultPic = false;
+
+                        if (!Settings.disableLoaderVideoBg)
+                            videoBackground = getThemeVBGLoader(out isDefaultVid);
+                        tex = getThemePBGLoader(out isDefaultPic);
+
+                        //Prevent default video loader to override non default pic
+                        if ((isDefaultVid && !isDefaultPic) && !Settings.forceLoaderOnlyVideoBg)
+                            videoBackground = null;
+
+                        Random rand = new Random();
+
+                        if ((isDefaultVid && isDefaultPic) || (Settings.forceLoaderOnlyVideoBg && videoBackground != null) || rand.Next(0, 2) == 0)
+                        {
+                            if (videoBackground != null)
+                                videoBg = videoBackground;
+                            else
+                                picBgTex = tex;
+                        }
+                        else
+                            picBgTex = tex;
+                    }
+
+                    if(picBgTex != null)
+                        GUI.DrawTexture(position, picBgTex, ScaleMode.StretchToFill);
+                    else
+                    {
+                        if (!CurrentMainAnimatedBgPlaying)
+                        {
+                            //Utils.CurrentMainAnimatedBg == null &&
+                            if (CurrentMainAnimatedBg == null)
+                            {
+                                Themes.LogMsg("Creation of an instance of VideoPlayer for LoaderGM");
+                                //CurrentMainAnimatedBg = Current.Root_Play.gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
+                                //CurrentMainAnimatedBg = GameObject.Find("Camera").AddComponent<UnityEngine.Video.VideoPlayer>();
+                                //Object.DontDestroyOnLoad(CurrentMainAnimatedBg);
+                                GameObject go = new GameObject("RTProjector");
+                                Object.DontDestroyOnLoad(go);
+
+                                projector = go.AddComponent<Camera>();
+                                projector.clearFlags = CameraClearFlags.SolidColor;
+                                projector.backgroundColor = Color.black;
+                                CurrentMainAnimatedBg = projector.gameObject.AddComponent<VideoPlayer>();
+                            }
+                            CurrentMainAnimatedBg.skipOnDrop = true;
+                            CurrentMainAnimatedBg.waitForFirstFrame = true;
+                            CurrentMainAnimatedBg.enabled = true;
+
+
+                            if (!CurrentMainAnimatedBgSourceSet)
+                                prepareAnimatedbackgroundLoader();
+
+                            if (CurrentMainAnimatedBg.isPrepared)
+                            {
+                                Themes.LogMsg("Animated loader animation of duration " + CurrentMainAnimatedBg.length);
+                                CurrentMainAnimatedBg.Play();
+                                CurrentMainAnimatedBgPlaying = true;
+                            }
+                        }
+
+                        GUI.DrawTexture(position, getDefaultBGLoader(), ScaleMode.StretchToFill);
+                        if (CurrentMainAnimatedBg != null)
+                        {
+                            if (CurrentMainAnimatedBg.texture == null && CurrentMainAnimatedBgPlaying)
+                            {
+                                CurrentMainAnimatedBg.frame = 0;
+                                CurrentMainAnimatedBgPlaying = false;
+                            }
+
+                            GUI.DrawTexture(position, CurrentMainAnimatedBg.texture, ScaleMode.StretchToFill);
+                            //Log.Message("Draw Video Tex "+ CurrentMainAnimatedBg.isPaused+" "+ CurrentMainAnimatedBg.isPlaying+" "+CurrentMainAnimatedBg.isPrepared+" "+ (CurrentMainAnimatedBg.texture == null));
+                        }
+                        else
+                        {
+                            CurrentMainAnimatedBgPlaying = false;
+                            CurrentMainAnimatedBgSourceSet = false;
+                        }
+                    }
 
                     //Widgets.DrawRectFast(new Rect(0, 0, UI.screenWidth, UI.screenHeight), Color.black);
                     //Rect rect1 = new Rect(100f, 100f, UI.screenWidth, UI.screenHeight);
@@ -67,7 +150,9 @@ namespace aRandomKiwi.RimThemes
                     }
 
                     int index = (int)(Time.time * fps);
-                    Texture2D[] frames = Themes.getThemeLoader();
+                    Texture2D[] frames =null;
+
+                    frames = Themes.getThemeLoader();
 
                     //Check if desired loader
                     if (frames != null)
@@ -78,6 +163,7 @@ namespace aRandomKiwi.RimThemes
                         GUI.color = Color.white;
                         GUI.DrawTexture(new Rect((UI.screenWidth / 2) - 98, (UI.screenHeight / 2) - 98, 196, 196), curTex);
                     }
+
                     try
                     {
                         if (!Settings.hideLoadingText)
@@ -90,6 +176,8 @@ namespace aRandomKiwi.RimThemes
                 }
                 else
                 {
+                    stopCurrentAnimatedbackgroundLoader();
+                    picBgTex = null;
                     curStep = LoaderSteps.Idle;
                     loaderLvl = 0;
                 }
@@ -117,7 +205,7 @@ namespace aRandomKiwi.RimThemes
             }
             catch(Exception e)
             {
-                Themes.LogMsg("LoaderGM OnGUI : "+e.Message);
+                Themes.LogMsg("LoaderGM OnGUI : "+e.Message+" StackTrace : "+ e.StackTrace);
             }
         }
 
@@ -279,15 +367,48 @@ namespace aRandomKiwi.RimThemes
                     loaderLvl = 20;
                     break;
             }
+
+            int loaderY = UI.screenHeight - 70;
+            int loaderInfosHeight = 50;
+
+            if (reachedMainMenu)
+            {
+                if(allTipsCached == null)
+                    allTipsCached = DefDatabase<TipSetDef>.AllDefsListForReading.SelectMany((TipSetDef set) => (SteamDeck.IsSteamDeck && set == TipSetDefOf.GameplayTips) ? set.tips.Skip(11) : set.tips).InRandomOrder().ToList();
+
+                loaderY = UI.screenHeight - 90;
+                loaderInfosHeight = 60;
+            }
+
             //Loader
-            Rect rectLoader = new Rect(0, UI.screenHeight - 70, (int)((float)UI.screenWidth*((float)loaderLvl/100)), 10);
+            Text.Font = GameFont.Small;
+            Rect rectLoader = new Rect(0, loaderY, (int)((float)UI.screenWidth*((float)loaderLvl/100)), 10);
             GUI.DrawTexture(rectLoader, getThemeRscLoader(LoaderRSC.LoaderBar), ScaleMode.StretchToFill);
 
             //If reference to loading text not cached
-            Rect rect = new Rect(0, UI.screenHeight - 60, UI.screenWidth, 50);
+            Rect rect = new Rect(0, loaderY+10, UI.screenWidth, loaderInfosHeight);
             Text.Anchor = TextAnchor.MiddleCenter;
             GUI.DrawTexture(rect, getThemeRscLoader(LoaderRSC.TextBar), ScaleMode.StretchToFill);
+            if (reachedMainMenu)
+            {
+                rect.y += 10;
+                rect.height = 30;
+            }
+            if (text == "")
+                text = "...";
             Widgets.Label(rect, text);
+            //Tip
+            if (reachedMainMenu)
+            {
+                rect.y += 20;
+                if (Time.realtimeSinceStartup - lastTimeUpdatedTooltip > 17.5f || lastTimeUpdatedTooltip < 0f)
+                {
+                    currentTipIndex = (currentTipIndex + 1) % allTipsCached.Count;
+                    lastTimeUpdatedTooltip = Time.realtimeSinceStartup;
+                }
+
+                Widgets.Label(rect, allTipsCached[currentTipIndex]);
+            }
             Text.Anchor = TextAnchor.UpperLeft;
         }
 
@@ -418,9 +539,12 @@ namespace aRandomKiwi.RimThemes
                 {
                     if (Themes.RDBBGLoader[entry.Key] != null)
                     {
+                        if (!Themes.DBBGLoader.ContainsKey(entry.Key))
+                            Themes.DBBGLoader[entry.Key] = new List<Texture2D>();
+
                         tex = new Texture2D(196, 196, TextureFormat.ARGB32, false);
                         tex.LoadImage(Themes.RDBBGLoader[entry.Key]);
-                        Themes.DBBGLoader[entry.Key] = tex;
+                        Themes.DBBGLoader[entry.Key].Add(tex);
                     }
                     else
                         Themes.DBBGLoader[entry.Key] = null;
@@ -516,13 +640,25 @@ namespace aRandomKiwi.RimThemes
                         //Attempt to get the property dynamically to verify sound validity
                         try
                         {
-                            if (Application.platform == RuntimePlatform.WindowsPlayer)
-                                Themes.DBSong[entry.Key][entry2.Key] = AudioGrain_ClipTheme.winLoadAudio(entry2.Value);
-                            else
-                                Themes.DBSong[entry.Key][entry2.Key] = AudioGrain_ClipTheme.linuxLoadAudio(entry2.Value);
+                            if (entry2.Key.StartsWith("EntrySong"))
+                            {
+                                if (!Themes.DBEntrySongDyn.ContainsKey(entry.Key))
+                                    Themes.DBEntrySongDyn[entry.Key] = new List<AudioClip>();
 
-                            //DBSong[themeID]["EntrySong"].ResolveReferences();
-                            //DBSound[themeID][curSoundName] = (AudioClip)((object)Manager.Load(sound, doStream, true, true));
+                                if (Application.platform == RuntimePlatform.WindowsPlayer)
+                                    Themes.DBEntrySongDyn[entry.Key].Add(AudioGrain_ClipTheme.winLoadAudio(entry2.Value));
+                                else
+                                    Themes.DBEntrySongDyn[entry.Key].Add(AudioGrain_ClipTheme.linuxLoadAudio(entry2.Value));
+
+                                Themes.DBSong[entry.Key][entry2.Key] = Themes.DBEntrySongDyn[entry.Key].Last();
+                            }
+                            else
+                            {
+                                if (Application.platform == RuntimePlatform.WindowsPlayer)
+                                    Themes.DBSong[entry.Key][entry2.Key] = AudioGrain_ClipTheme.winLoadAudio(entry2.Value);
+                                else
+                                    Themes.DBSong[entry.Key][entry2.Key] = AudioGrain_ClipTheme.linuxLoadAudio(entry2.Value);
+                            }
                             Themes.LogMsg(entry.Key+" : Loading custom song EntrySong OK");
                         }
                         catch (Exception e)
@@ -539,27 +675,44 @@ namespace aRandomKiwi.RimThemes
         }
 
 
-        public static string getDynBGLoader(string path)
+        public static List<string> getDynBGLoader(string path, int mode = 1)
         {
             try
             {
                 string dir = Path.GetDirectoryName(path);
                 DirectoryInfo directoryInfo = new DirectoryInfo(dir);
-                IOrderedEnumerable<FileInfo> listLoader = from f in directoryInfo.GetFiles()
-                                                          where f.Name.StartsWith("BGLoader")
-                                                          orderby f.LastWriteTime descending
-                                                          select f;
 
-                if (listLoader.Count() <= 1)
-                    return path;
+                IOrderedEnumerable<FileInfo> listLoader;
+                
+                if(mode == 1)
+                    listLoader  = from f in directoryInfo.GetFiles()
+                                    where f.Name.StartsWith("BGLoader") && f.Extension == ".jpg"
+                                    orderby f.LastWriteTime descending
+                                    select f;
+                else
+                    listLoader = from f in directoryInfo.GetFiles()
+                                 where f.Name.StartsWith("BGLoader") && f.Extension == ".webm"
+                                 orderby f.LastWriteTime descending
+                                 select f;
+
+
+                if (listLoader.Count() == 0)
+                {
+                    return null;
+                }
                 else
                 {
-                    return listLoader.RandomElement().FullName;
+                    List<string> ret = new List<string>();
+                    foreach (var el in listLoader)
+                    {
+                        ret.Add(el.FullName);
+                    }
+                    return ret;
                 }
             }
             catch (Exception)
             {
-                return path;
+                return null;
             }
         }
 
@@ -571,7 +724,7 @@ namespace aRandomKiwi.RimThemes
             if (Themes.TexLoaderBar == null)
             {
                 Themes.TexLoaderBar = SolidColorMaterials.NewSolidColorTexture(new Color(0.18f, 0.27f, 0.772f, 0.77f));
-                Themes.TexLoaderText = SolidColorMaterials.NewSolidColorTexture(new Color(0.27f, 0.46f, 0.5f, 0.77f));
+                Themes.TexLoaderText = SolidColorMaterials.NewSolidColorTexture(new Color(0.42f, 0.50f, 0.54f, 0.77f));
             }
 
             Dictionary<string, Texture2D> db = null;
@@ -579,11 +732,6 @@ namespace aRandomKiwi.RimThemes
             string fn = "";
             switch (rsc)
             {
-                case LoaderRSC.BGLoader:
-                    db = Themes.DBBGLoader;
-                    defaultTex = getDefaultBGLoader();
-                    fn = "BGLoader.jpg";
-                    break;
                 case LoaderRSC.LoaderBar:
                     db = Themes.DBTexLoaderBar;
                     defaultTex = Themes.TexLoaderBar;
@@ -596,144 +744,227 @@ namespace aRandomKiwi.RimThemes
                     break;
             }
 
-            string[] parts = Settings.curTheme.Split('§');
-            if (parts[0] == "-1" && !Settings.disableDefaultThemes)
+            string[] parts = Settings.getCurThemeParts();
+            if ( parts[0] == "-1" && !Utils.isDefaultThemeAllowed(parts[1]))
+                return defaultTex;
+
+            //Loader not loaded we try to load it
+            if (!db.ContainsKey(Settings.curTheme))
             {
-                if( !Utils.isDefaultThemeAllowed(parts[1]))
+                string path = getLoaderRootPath() + fn;
+
+                if (!File.Exists(path))
                 {
+                    //If applicable, loading the loader by default
                     return defaultTex;
                 }
-                //Loader not loaded we try to load it
-                if (!db.ContainsKey(Settings.curTheme))
+                try
                 {
-                    string path = Utils.currentMod.RootDir + Path.DirectorySeparatorChar
-                        + "Themes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
-                    if (rsc == LoaderRSC.BGLoader)
-                        path = getDynBGLoader(path);
-
-                    if (!File.Exists(path))
-                    {
-                        //If applicable, loading the loader by default
-                        return defaultTex;
-                    }
-                    try
-                    {
-                        db[Settings.curTheme] = Themes.customTexLoad(path);
-                        return db[Settings.curTheme];
-                    }
-                    catch (Exception e)
-                    {
-                        db[Settings.curTheme] = defaultTex;
-                        Themes.LogMsg("Cannot load custom loader rsc : " + e.Message);
-                        return defaultTex;
-                    }
+                    db[Settings.curTheme] = Themes.customTexLoad(path);
+                    return db[Settings.curTheme];
                 }
-                else
+                catch (Exception e)
                 {
-                    //No loader, we grab the default one
-                    if (db[Settings.curTheme] == null)
-                        return defaultTex;
-                    else
-                        return db[Settings.curTheme];
-                }
-            }
-            else if (parts[0] == "-2")
-            {
-                //Loader not loaded we try to load it
-                if (!db.ContainsKey(Settings.curTheme))
-                {
-                    string basePath = Utils.RWBaseFolderPath;
-
-                    string path = basePath + Path.DirectorySeparatorChar
-                        + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
-
-                    if (rsc == LoaderRSC.BGLoader)
-                        path = getDynBGLoader(path);
-
-                    if (!File.Exists(path))
-                    {
-                        //If applicable, loading the loader by default
-                        return defaultTex;
-                    }
-                    try
-                    {
-                        db[Settings.curTheme] = Themes.customTexLoad(path);
-                        return db[Settings.curTheme];
-                    }
-                    catch (Exception e)
-                    {
-                        db[Settings.curTheme] = defaultTex;
-                        Themes.LogMsg("Cannot load custom loader rsc from default themes : " + e.Message);
-                        return defaultTex;
-                    }
-                }
-                else
-                {
-                    //No loader, we grab the default one
-                    if (db[Settings.curTheme] == null)
-                        return defaultTex;
-                    else
-                        return db[Settings.curTheme];
+                    db[Settings.curTheme] = defaultTex;
+                    Themes.LogMsg("Cannot load custom loader rsc : " + e.Message);
+                    return defaultTex;
                 }
             }
             else
             {
-                //Theme located in an external theme
-                //If already loaded we return it
-                if (db.ContainsKey(Settings.curTheme))
+                //No loader, we grab the default one
+                if (db[Settings.curTheme] == null)
+                    return defaultTex;
+                else
+                    return db[Settings.curTheme];
+            }
+        }
+
+        public static Texture2D getThemePBGLoader(out bool isDefault)
+        {
+            isDefault = false;
+            Texture2D defaultTex = getDefaultBGLoader();
+
+            string[] parts = Settings.getCurThemeParts();
+            if (parts[0] == "-1" && !Utils.isDefaultThemeAllowed(parts[1]))
+            {
+                isDefault = true;
+                return defaultTex;
+            }
+
+            //Loader not loaded we try to load it
+            if (!Themes.DBBGLoader.ContainsKey(Settings.curTheme))
+            {
+                string path = getLoaderRootPath() + "BGLoader.jpg";
+                List<string> ret = getDynBGLoader(path);
+
+                if (ret == null)
                 {
-                    //No loader, we grab the default one
-                    if (db[Settings.curTheme] == null)
+                    isDefault = true;
+                    Themes.DBBGLoader[Settings.curTheme] = null;
+                    return defaultTex;
+                }
+                Themes.DBBGLoader[Settings.curTheme] = new List<Texture2D>();
+
+                try
+                {
+                    foreach (var el in ret)
+                    {
+                        Themes.DBBGLoader[Settings.curTheme].Add(Themes.customTexLoad(el));
+                    }
+                    return Themes.DBBGLoader[Settings.curTheme].RandomElement();
+                }
+                catch (Exception e)
+                {
+                    Themes.LogMsg("Cannot load custom loader rsc : " + e.Message);
+                    if (Themes.DBBGLoader[Settings.curTheme].Count() == 0)
+                    {
+                        isDefault = true;
+                        Themes.DBBGLoader[Settings.curTheme] = null;
                         return defaultTex;
-                    else
-                        return db[Settings.curTheme];
+                    }
+                    return Themes.DBBGLoader[Settings.curTheme].RandomElement();
+                }
+            }
+            else
+            {
+                //No loader, we grab the default one
+                if (Themes.DBBGLoader[Settings.curTheme] == null)
+                {
+                    isDefault = true;
+                    return defaultTex;
+                }
+                else
+                    return Themes.DBBGLoader[Settings.curTheme].RandomElement();
+            }
+        }
+
+        public static string getThemeVBGLoader(out bool isDefault)
+        {
+            isDefault = false;
+            if (VanillaBGLoaderAnimated == null)
+            {
+                VanillaBGLoaderAnimated = Utils.currentMod.RootDir + Path.DirectorySeparatorChar + "Rtrsc" + Path.DirectorySeparatorChar + "VanillaBGLoader.webm";
+            }
+            string video = VanillaBGLoaderAnimated;
+            
+            string[] parts = Settings.getCurThemeParts();
+            if (parts[0] == "-1" && !Utils.isDefaultThemeAllowed(parts[1]))
+            {
+                isDefault = true;
+                return video;
+            }
+
+            //Loader not loaded we try to load it
+            if (!Themes.DBBGLoaderAnimated.ContainsKey(Settings.curTheme))
+            {
+                string path = getLoaderRootPath();
+                List<string> ret = getDynBGLoader(path,2);
+                Themes.DBBGLoaderAnimated[Settings.curTheme] = ret;
+                if (ret == null)
+                {
+                    isDefault = true;
+                    return video;
                 }
                 else
                 {
-                    //External theme not loaded we try to load it
-                    List<ModContentPack> runningModsListForReading = LoadedModManager.RunningModsListForReading;
-                    for (int i = runningModsListForReading.Count - 1; i >= 0; i--)
-                    {
-                        ModContentPack cmod = runningModsListForReading[i];
-                        if (cmod.PackageId == parts[0])
-                        {
-                            //Check if existence Loader.png for the mod
-                            string loaderBGPath = cmod.RootDir + Path.DirectorySeparatorChar + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar + fn;
-
-                            if (rsc == LoaderRSC.BGLoader)
-                                loaderBGPath = getDynBGLoader(loaderBGPath);
-                            if (File.Exists(loaderBGPath))
-                            {
-                                try
-                                {
-                                    db[Settings.curTheme] = Themes.customTexLoad(loaderBGPath);
-                                    return db[Settings.curTheme];
-                                }
-                                catch (Exception e)
-                                {
-                                    db[Settings.curTheme] = defaultTex;
-                                    Themes.LogMsg("Cannot load custom loader rsc : " + e.Message);
-                                    return defaultTex;
-                                }
-                            }
-                        }
-                    }
-
-                    //No loader found for the current theme, we return the default one
-                    return defaultTex;
+                    return ret.RandomElement();
                 }
             }
+            else
+            {
+                //No loader, we grab the default one
+                if (Themes.DBBGLoaderAnimated[Settings.curTheme] == null)
+                {
+                    isDefault = true;
+                    return video;
+                }
+                else
+                    return Themes.DBBGLoaderAnimated[Settings.curTheme].RandomElement();
+            }
+        }
+
+
+        public static string getLoaderRootPath()
+        {
+            string path = null;
+            string[] parts = Settings.getCurThemeParts();
+            if (parts[0] == "-1" && !Settings.disableDefaultThemes)
+            {
+                    path = Utils.currentMod.RootDir + Path.DirectorySeparatorChar
+                        + "Themes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar;
+            }
+            else if (parts[0] == "-2")
+            {
+                string basePath = Utils.RWBaseFolderPath;
+                path = basePath + Path.DirectorySeparatorChar
+                        + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar;
+            }
+            else
+            {
+                //External theme not loaded we try to load it
+                List<ModContentPack> runningModsListForReading = LoadedModManager.RunningModsListForReading;
+                for (int i = runningModsListForReading.Count - 1; i >= 0; i--)
+                {
+                    ModContentPack cmod = runningModsListForReading[i];
+                    if (cmod.PackageId == parts[0])
+                    {
+                        //Check if existence Loader.png for the mod
+                        path = cmod.RootDir + Path.DirectorySeparatorChar + "RimThemes" + Path.DirectorySeparatorChar + parts[1] + Path.DirectorySeparatorChar + "Loader" + Path.DirectorySeparatorChar;
+                        break;
+                    }
+                }
+            }
+            return path;
         }
 
         //Return loader by default, if not loaded it is loaded on the way
         private static Texture2D getDefaultBGLoader()
         {
             if (Loader.tex[0] == null)
+            {
                 Loader.initTextures();
+            }
 
             return Loader.bgTex;
         }
 
+        public static void prepareAnimatedbackgroundLoader()
+        {
+            CurrentMainAnimatedBg.renderMode = VideoRenderMode.RenderTexture;
+            CurrentMainAnimatedBg.isLooping = true;
+            CurrentMainAnimatedBg.audioOutputMode = VideoAudioOutputMode.None;
+            CurrentMainAnimatedBg.targetCameraAlpha = 1.0F;
+            CurrentMainAnimatedBg.frame = 0;
+            CurrentMainAnimatedBg.playOnAwake = true;
+
+            CurrentMainAnimatedBg.url = videoBg;
+            CurrentMainAnimatedBgSourceSet = true;
+            CurrentMainAnimatedBg.errorReceived += delegate (VideoPlayer source, string message)
+            {
+                Themes.LogMsg("LoaderVideoPlayer_Error : " + message + " ");
+            };
+            CurrentMainAnimatedBg.time = 0;
+            CurrentMainAnimatedBg.Prepare();
+        }
+
+        public static void stopCurrentAnimatedbackgroundLoader()
+        {
+            //Log.Message("stopCurrentAnimatedbackgroundLoader");
+            videoBg = null;
+            CurrentMainAnimatedBgPlaying = false;
+            CurrentMainAnimatedBgSourceSet = false;
+
+            //Potential shutdown animated backgrounds
+            if (CurrentMainAnimatedBg != null)
+            {
+                if( CurrentMainAnimatedBg.isPlaying)
+                    CurrentMainAnimatedBg.Stop();
+
+                CurrentMainAnimatedBg.enabled = false;
+                //Object.DestroyImmediate(CurrentMainAnimatedBg);
+            }
+        }
 
         public static LoaderSteps curStep=0;
         public static int loaderLvl = 0;
@@ -779,6 +1010,18 @@ namespace aRandomKiwi.RimThemes
         public static bool themeTexAlreadyLoaded = false;
 
         public static bool reachedMainMenu = false;
+        public static Camera projector = null;
+        public static VideoPlayer CurrentMainAnimatedBg = null;
+        public static bool CurrentMainAnimatedBgPlaying = false;
+        public static bool CurrentMainAnimatedBgSourceSet = false;
+        public static string  videoBg = null;
+        public static Texture2D picBgTex = null;
+
+        private static List<string> allTipsCached;
+        private static float lastTimeUpdatedTooltip = -1f;
+        private static int currentTipIndex = 0;
+
+        public static string VanillaBGLoaderAnimated = null;
     }
 }
 

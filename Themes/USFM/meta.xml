@@ -20,28 +20,28 @@
   <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(60,60,60)</GenUI.MouseoverColor>
-  <Widgets.WindowBGFillColor>(40,40,40,145)</Widgets.WindowBGFillColor>
+  <Widgets.WindowBGFillColor>(40,40,40,200)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(10,10,10)</Widgets.WindowBGBorderColor>
   
-  <Widgets.TutorWindowBGFillColor>(196, 0, 0,135)</Widgets.TutorWindowBGFillColor>
+  <Widgets.TutorWindowBGFillColor>(196, 0, 0,200)</Widgets.TutorWindowBGFillColor>
   <Widgets.TutorWindowBGBorderColor>(146, 0, 0,199)</Widgets.TutorWindowBGBorderColor>
   
   <Widgets.SeparatorLineColor>(196, 0, 0,195)</Widgets.SeparatorLineColor>
   <Widgets.SeparatorLabelColor>(247, 0, 71)</Widgets.SeparatorLabelColor>
   
-  <Widgets.MenuSectionBGFillColor>(10,10,10,175)</Widgets.MenuSectionBGFillColor>
+  <Widgets.MenuSectionBGFillColor>(10,10,10,200)</Widgets.MenuSectionBGFillColor>
   <Widgets.MenuSectionBGBorderColor>(10,10,10)</Widgets.MenuSectionBGBorderColor>
   
-  <Widgets.OptionUnselectedBGFillColor>(225,66,0,175)</Widgets.OptionUnselectedBGFillColor>
-  <Widgets.OptionSelectedBGFillColor>(196,0,0,175)</Widgets.OptionSelectedBGFillColor>
+  <Widgets.OptionUnselectedBGFillColor>(225,66,0,200)</Widgets.OptionUnselectedBGFillColor>
+  <Widgets.OptionSelectedBGFillColor>(196,0,0,200)</Widgets.OptionSelectedBGFillColor>
   <Widgets.optionTextActiveColor>(255,255,255)</Widgets.optionTextActiveColor>
-  <Widgets.OptionUnselectedBGBorderColor>(0,0,0,175)</Widgets.OptionUnselectedBGBorderColor>
-  <Widgets.OptionSelectedBGBorderColor>(0,0,0,175)</Widgets.OptionSelectedBGBorderColor>
+  <Widgets.OptionUnselectedBGBorderColor>(0,0,0,200)</Widgets.OptionUnselectedBGBorderColor>
+  <Widgets.OptionSelectedBGBorderColor>(0,0,0,200)</Widgets.OptionSelectedBGBorderColor>
   
   <FloatMenuOption.ColorTextDisabled>(229,229,229)</FloatMenuOption.ColorTextDisabled>
-  <FloatMenuOption.ColorBGDisabled>(230,0,0,175)</FloatMenuOption.ColorBGDisabled>
+  <FloatMenuOption.ColorBGDisabled>(230,0,0,200)</FloatMenuOption.ColorBGDisabled>
   <FloatMenuOption.ColorBGActiveMouseover>(196,0,0)</FloatMenuOption.ColorBGActiveMouseover>
-  <FloatMenuOption.ColorBGActive>(10,10,10,175)</FloatMenuOption.ColorBGActive>
+  <FloatMenuOption.ColorBGActive>(10,10,10,200)</FloatMenuOption.ColorBGActive>
   
     <textColorGray>(1.0, 1.0, 1.0)</textColorGray>
   <dynColor>(1.0,1.0,1.0,0.5)=(1.0,1.0,1.0,1.0)</dynColor>

@@ -136,6 +136,8 @@ namespace aRandomKiwi.RimThemes
         {
             if (Utils.tempDisableDynColor)
                 return color;
+            if (Settings.enableAccessibilityMode && (color.r == Color.clear.r && color.g == Color.clear.g && color.b == Color.clear.b && color.a == Color.clear.a))
+                return Utils.accessibilityColor;
 
             Color c;
             string theme = Settings.curTheme;

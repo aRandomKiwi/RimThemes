@@ -14,6 +14,7 @@ using System.Reflection;
 using RuntimeAudioClipLoader;
 using Verse.Sound;
 using UnityEngine.Networking;
+using Random = System.Random;
 
 namespace aRandomKiwi.RimThemes
 {
@@ -25,6 +26,10 @@ namespace aRandomKiwi.RimThemes
             BindingFlags NPS = (BindingFlags.NonPublic | BindingFlags.Static);
 
             /************************************************************************* Textures **********************************************************************/
+            fieldsOfInterestTex["Alert"] = new List<FOI>()
+            {
+                new FOI("AlertBGTex",NPS), new FOI("AlertBGTexHighlight",NPS)
+            };
             //Init of the list of variables of interest of textures
             fieldsOfInterestTex["Widgets"] = new List<FOI>()
             {
@@ -123,6 +128,7 @@ namespace aRandomKiwi.RimThemes
 
             //Definition of relative NS
             //fieldsOfInterestTexNS["UI_BackgroundMain"] = "RimWorld";
+            fieldsOfInterestTexNS["Alert"] = "RimWorld";
             fieldsOfInterestTexNS["TexCommand"] = "RimWorld";
             fieldsOfInterestTexNS["WidgetsWork"] = "RimWorld";
             fieldsOfInterestTexNS["ColonistBarColonistDrawer"] = "RimWorld";
@@ -264,6 +270,9 @@ namespace aRandomKiwi.RimThemes
                             Settings.curTheme = Themes.VanillaThemeID;
                         LogMsg("Skip all default themes : disabled in user's settings");
                     }
+
+                    //Injection of the vanilla animated background
+                    DBAnimatedBackground[Themes.VanillaThemeID] = Utils.currentMod.RootDir + Path.DirectorySeparatorChar + "Rtrsc" + Path.DirectorySeparatorChar + "VanillaVBG.webm";
             }
             catch(Exception e)
             {
@@ -922,12 +931,12 @@ namespace aRandomKiwi.RimThemes
                     LogMsg("Saving vanilla theme ending");
                     vanillaThemeSaved = true;
                     Utils.applyWindowFillColorOpacityOverride(newTheme);
-
+                    //shuffleAnimatedBackgrounds(newTheme);
+                    changeThemeNow(newTheme, manualChange);
                     //Application theme at startup, if theme vanilla does not need to be loaded it is already the case
                     if (theme == VanillaThemeID)
                         return;
                 }
-
                 //Vanilla base theme restore only if current theme not vanilla
                 if (theme != VanillaThemeID)
                 {
@@ -938,22 +947,30 @@ namespace aRandomKiwi.RimThemes
                 }
 
                 //shuttfle dyntexs and videos
-                if (DBTexDyn.ContainsKey(newTheme))
+                string ctheme = Settings.getCurThemeForBackgroundRegen(newTheme);
+                if (DBTexDyn.ContainsKey(ctheme))
                 {
-                    foreach (var d1 in DBTexDyn[newTheme])
+                    foreach (var d1 in DBTexDyn[ctheme])
                     {
                         foreach (var d2 in d1.Value)
                         {
-                            if (DBTex.ContainsKey(newTheme) && DBTex[newTheme].ContainsKey(d1.Key) && DBTex[newTheme][d1.Key].ContainsKey(d2.Key))
-                                DBTex[newTheme][d1.Key][d2.Key] = d2.Value.RandomElement();
+                            bool isBGTex = d1.Key == "UI_BackgroundMain" && d2.Key == "BGPlanet";
+                            if (DBTex.ContainsKey(ctheme) && DBTex[ctheme].ContainsKey(d1.Key) && DBTex[ctheme][d1.Key].ContainsKey(d2.Key))
+                            {
+                                if (!isBGTex ||
+                                    (isBGTex && !Settings.keepCurrentBg))
+                                {
+                                    Random r = new Random();
+                                    int index = r.Next(0, d2.Value.Count);
+                                    DBTex[ctheme][d1.Key][d2.Key] = d2.Value[index];
+                                    if (isBGTex)
+                                        Settings.curRandomBgIndex = index;
+                                }
+                            }
                         }
                     }
                 }
-
-                if (DBAnimatedBackgroundDyn.ContainsKey(newTheme))
-                {
-                    DBAnimatedBackground[newTheme] = DBAnimatedBackgroundDyn[newTheme].RandomElement();
-                }
+                shuffleAnimatedBackgrounds(newTheme);
 
                 stopCurrentAnimatedBackground();
                 //Vanilla crush with the new theme
@@ -982,6 +999,30 @@ namespace aRandomKiwi.RimThemes
             catch(Exception e)
             {
                 Themes.LogError("Error while trying to change theme : "+e.Message);
+            }
+        }
+
+        public static void shuffleAnimatedBackgrounds(string newTheme)
+        {
+            string ctheme = Settings.getCurThemeForBackgroundRegen(newTheme);
+            if (!Settings.keepCurrentBg)
+            {
+                if (DBAnimatedBackgroundDyn.ContainsKey(ctheme) && DBAnimatedBackgroundDyn[ctheme].Count() > 0)
+                {
+                    Random r = new Random();
+                    int index = r.Next(0, DBAnimatedBackgroundDyn[ctheme].Count);
+                    DBAnimatedBackground[ctheme] = DBAnimatedBackgroundDyn[ctheme][index];
+                    Settings.curRandomBgIndex = index;
+                }
+                else
+                {
+                    if (Settings.forceVanillaVideoBgWhenNoVBG)
+                    {
+                        //No animated background, set the Rimworld's default one
+                        DBAnimatedBackground[ctheme] = DBAnimatedBackground[Themes.VanillaThemeID];
+                        Settings.curRandomBgIndex = 0;
+                    }
+                }
             }
         }
 
@@ -1019,7 +1060,7 @@ namespace aRandomKiwi.RimThemes
             }
 
 
-            if (!DBSong.ContainsKey(theme) || DBSong[theme] == null)
+            if (!DBSong.ContainsKey(theme) || DBSong[theme] == null || !DBSong[theme].ContainsKey("EntrySong"))
                 theme = VanillaThemeID;
 
             try
@@ -1043,7 +1084,10 @@ namespace aRandomKiwi.RimThemes
                     if (audio != null)
                     {
                         audio.Stop();
-                        audio.clip = DBSong[theme]["EntrySong"];
+                        if (theme == VanillaThemeID || !DBEntrySongDyn.ContainsKey(theme))
+                            audio.clip = DBSong[theme]["EntrySong"];
+                        else
+                            audio.clip = DBEntrySongDyn[theme].RandomElement();
                         audio.Play();
                     }
                 }
@@ -1335,7 +1379,7 @@ namespace aRandomKiwi.RimThemes
                                 savedColor[field.field] = (Color)classType.GetField(field.field, (BindingFlags)field.bf).GetValue(null);
                             }
                         }
-                        catch (Exception _e)
+                        catch (Exception)
                         {
                             try
                             {
@@ -1400,7 +1444,7 @@ namespace aRandomKiwi.RimThemes
         /*
          * Obtaining a texture for the specified class and fieldName, if not available then obtaining the Vanilla version
          */
-        public static Texture2D getThemeTex(string className,string fieldName,string dtheme = "")
+        public static Texture2D getThemeTex(string className,string fieldName,string dtheme = "",int index = -1)
         {
             string theme;
             if (dtheme != "")
@@ -1415,6 +1459,12 @@ namespace aRandomKiwi.RimThemes
                     return null;
                 else
                     return DBTex[VanillaThemeID][className][fieldName];
+            }
+
+            if(index != -1 && DBTexDyn.ContainsKey(theme) && DBTexDyn[theme].ContainsKey(className) && DBTexDyn[theme][className].ContainsKey(fieldName)
+                   && DBTexDyn[theme][className][fieldName].Count() >index)
+            {
+                return DBTexDyn[theme][className][fieldName][index];
             }
 
             return DBTex[theme][className][fieldName];
@@ -2110,14 +2160,24 @@ namespace aRandomKiwi.RimThemes
                 return;
             }
 
+            List<string> avt = Themes.DBAvailableThemes.ToList();
             do
             {
-                ret = Themes.DBAvailableThemes.RandomElement();
+                ret = avt.RandomElement();
+                avt.Remove(ret);
             }
-            while (Themes.DBAvailableThemes.Count() >= 2 && ret == Settings.curRandomBg);
+            while (avt.Count() > 0 && ret == Settings.curRandomBg);
 
             //Recording of the randomly selected theme
             Settings.curRandomBg = ret;
+        }
+
+        static public void setNewRandomBgMain()
+        {
+            //Current video bg stop if applicable
+            Themes.stopCurrentAnimatedBackground();
+            LoaderGM.stopCurrentAnimatedbackgroundLoader();
+            Themes.setNewRandomBg();
         }
 
 
@@ -2154,6 +2214,7 @@ namespace aRandomKiwi.RimThemes
                 Utils.CurrentMainAnimatedBgSourceSet = false;
             }
         }
+        
 
         //Storage of fix tables in case of field / class name change to avoid breaking themes
         static public Dictionary<string, string> DBFix = new Dictionary<string, string>();
@@ -2190,7 +2251,8 @@ namespace aRandomKiwi.RimThemes
         static public Dictionary<string, Texture2D[]> DBLoader = new Dictionary<string, Texture2D[]>();
         static public Dictionary<string, bool> DBNoLoader = new Dictionary<string, bool>();
         static public Dictionary<string, bool> DBLoaderNotFound = new Dictionary<string, bool>();
-        static public Dictionary<string, Texture2D> DBBGLoader = new Dictionary<string, Texture2D>();
+        static public Dictionary<string, List<Texture2D>> DBBGLoader = new Dictionary<string, List<Texture2D>>();
+        static public Dictionary<string, List<string>> DBBGLoaderAnimated = new Dictionary<string, List<string>>();
         static public Dictionary<string, Texture2D> DBTexLoaderBar = new Dictionary<string, Texture2D>();
         static public Dictionary<string, Texture2D> DBTexLoaderText = new Dictionary<string, Texture2D>();
         static public Dictionary<string, Dictionary<string, Dictionary<string, Texture2D>>> DBTex = new Dictionary<string, Dictionary<string, Dictionary<string, Texture2D>>>();
@@ -2228,6 +2290,7 @@ namespace aRandomKiwi.RimThemes
         static public Dictionary<string, Dictionary<string, Dictionary<string,Color>>> DBColor = new Dictionary<string, Dictionary<string, Dictionary<string,Color>>>();
         static public Dictionary<string, Dictionary<string, AudioGrain_ClipTheme>> DBSound = new Dictionary<string, Dictionary<string, AudioGrain_ClipTheme>>();
         static public Dictionary<string, Dictionary<string, AudioClip>> DBSong = new Dictionary<string, Dictionary<string, AudioClip>>();
+        static public Dictionary<string, List<AudioClip>> DBEntrySongDyn = new Dictionary<string, List<AudioClip>>();
         static public Dictionary<string, Dictionary<string, string>> DBText = new Dictionary<string, Dictionary<string, string>>();
         static public Dictionary<string, Dictionary<string, int>> DBVal = new Dictionary<string, Dictionary<string, int>>();
         static public Dictionary<string,Dictionary<string,string>> DBModInfo = new Dictionary<string, Dictionary<string, string>>();

@@ -310,6 +310,8 @@
     <Compile Include="Harmony\DWinStacking_Patchs.cs" />
     <Compile Include="Harmony\EditWindow_Log_Patch.cs" />
     <Compile Include="Harmony\FactionRelationKindUtility_Patch.cs" />
+    <Compile Include="Harmony\LongEventHandler_Patch.cs" />
+    <Compile Include="Harmony\AccessibilityPatchs.cs" />
     <Compile Include="Harmony\SaveLoad_Patchs.cs" />
     <Compile Include="GameObjects\LoaderGM.cs" />
     <Compile Include="Harmony\OptionListingUtility_Patch.cs" />
@@ -321,7 +323,7 @@
     <Compile Include="Harmony\Current_Patch.cs" />
     <Compile Include="Harmony\Page_ModsConfig_Patch.cs" />
     <Compile Include="Harmony\UI_BackgroundMain_Patch.cs" />
-    <Compile Include="Harmony\GUI_Patch.cs" />
+    <Compile Include="Harmony\ModSummaryWindow_Patch.cs" />
     <Compile Include="Harmony\Widgets_Patch.cs" />
     <Compile Include="Harmony\Window_Patch.cs" />
     <Compile Include="Settings.cs" />

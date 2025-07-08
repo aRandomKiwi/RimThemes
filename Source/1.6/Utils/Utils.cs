@@ -17,7 +17,9 @@ namespace aRandomKiwi.RimThemes
     [StaticConstructorOnStartup]
     static class Utils
     {
+        public static Color accessibilityColor = new Color(0.1f,0.1f,0.1f,0.5f);
         public static bool tempDisableDynColor= false;
+        public static bool tempEnableAccessibilityMode = false;
         public static bool tempDisableNoTransparentText = false;
         public static bool tempDisableButtonsBackground = false;
         public static bool textFontSetterLock = false;
@@ -44,6 +46,7 @@ namespace aRandomKiwi.RimThemes
             + "-Added the ability to have multiple random game textures" + Environment.NewLine + Environment.NewLine
             + "-Improved settings menu accessibility UI" + Environment.NewLine + Environment.NewLine
             + "-Added the ability to have multiple random images in the loading screen" + Environment.NewLine + Environment.NewLine
+            + "-Loader now display tips" + Environment.NewLine + Environment.NewLine
             + "-Added the ability for themes to hide the translations infos dialog (determined by the theme by default)" + Environment.NewLine + Environment.NewLine
             + "-Improved readability of certain default themes" + Environment.NewLine + Environment.NewLine
             + "-Fix opacity override setting not working properly" + Environment.NewLine + Environment.NewLine + Environment.NewLine

@@ -4,6 +4,7 @@ using System;
 using HarmonyLib;
 using System.Collections.Generic;
 using System.Reflection;
+using Random = System.Random;
 
 namespace aRandomKiwi.RimThemes
 {
@@ -22,7 +23,10 @@ namespace aRandomKiwi.RimThemes
         public static int windowsShadowMode = 3;
         public static bool keepCurrentBg = false;
         public static bool disableRandomBg = true;
-        public static bool disableVideoBg = true;
+        public static bool disableVideoBg = false;
+        public static bool forceVanillaVideoBgWhenNoVBG = false;
+        public static bool disableLoaderVideoBg = false;
+        public static bool forceLoaderOnlyVideoBg = false;
         public static bool disableCustomFontsInConsole = true;
         public static bool disableWallpaper = false;
         public static bool disableCustomFonts = false;
@@ -40,6 +44,7 @@ namespace aRandomKiwi.RimThemes
         public static bool hideLoadingText = false;
         public static bool verboseMode = false;
         public static string curRandomBg = null;
+        public static int curRandomBgIndex = 0;
         public static string lastVersionInfo = "";
         public static bool disableFontFilterModePoint = true;
         public static bool disableTinyCustomFont = false;
@@ -57,6 +62,7 @@ namespace aRandomKiwi.RimThemes
         public static int ludeonLogoMode = 1;
         public static int cornerInfoMode = 1;
         public static bool disableDefaultThemes = false;
+        public static bool enableAccessibilityMode = false;
 
         public static bool enableCentipedeTheme = true;
         public static bool enableCyberpunkTheme = true;
@@ -73,6 +79,7 @@ namespace aRandomKiwi.RimThemes
 
         public static bool SectionGeneralExpanded = false;
         public static bool SectionDefaultThemesExpanded = false;
+        public static bool SectionVideoExpanded = false;
         public static bool SectionOpacityExpanded = false;
         public static bool SectionRandomBgExpanded = false;
         public static bool SectionDialogStackingExpanded = false;
@@ -84,6 +91,8 @@ namespace aRandomKiwi.RimThemes
         public static bool SectionTranslationCreditsExpanded = false;
         public static bool SectionLudeonLogoExpanded = false;
         public static bool SectionInfosExpanded = false;
+        public static bool SectionAccessibilityExpanded = false;
+        public static bool SectionFontsExpanded = false;
 
         public static Vector2 scrollPosition = Vector2.zero;
 
@@ -97,8 +106,13 @@ namespace aRandomKiwi.RimThemes
             var defaultColumnWidth = (inRect.width - 50);
             Listing_Standard list = new Listing_Standard() {  };
 
+            if(Widgets.ButtonImage(new Rect(inRect.width - 95, 20, 90, 72), Loader.rtUpdateIconTex, Color.white, Color.green))
+            {
+                Find.WindowStack.Add(new Dialog_Update());
+            }
+
             //Image logo
-            if( Widgets.ButtonImage(new Rect((inRect.width / 2) - 90, inRect.y, 180, 144), Loader.logoTex, Color.white, Color.green))
+            if ( Widgets.ButtonImage(new Rect((inRect.width / 2) - 90, inRect.y, 180, 144), Loader.logoTex, Color.white, Color.green))
                 Find.WindowStack.Add(new Dialog_ThemesList());
 
             var outRect = new Rect(inRect.x, inRect.y+135, inRect.width, inRect.height-135);
@@ -121,11 +135,9 @@ namespace aRandomKiwi.RimThemes
 
             if (SectionGeneralExpanded)
             {
-                list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
-                list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
+                bool prevDisableVideoBg = disableVideoBg;
+
                 list.CheckboxLabeled("RimTheme_SettingsDisableWallpaper".Translate(), ref disableWallpaper);
-                list.CheckboxLabeled("RimTheme_SettingsDisableFont".Translate(), ref disableCustomFonts);
-                list.CheckboxLabeled("RimTheme_SettingsDisableCustomFontConsole".Translate(), ref disableCustomFontsInConsole);
                 list.CheckboxLabeled("RimTheme_SettingsDisableCursor".Translate(), ref disableCustomCursors);
                 list.CheckboxLabeled("RimTheme_SettingsDisableParticle".Translate(), ref disableParticle);
                 list.CheckboxLabeled("RimTheme_SettingsShowThemeManagerAsList".Translate(), ref modManagerAsOptionList);
@@ -136,7 +148,12 @@ namespace aRandomKiwi.RimThemes
                 list.CheckboxLabeled("RimTheme_SettingsHideLoadingText".Translate(), ref hideLoadingText);
                 list.CheckboxLabeled("RimTheme_SettingsDisableCustomLoader".Translate(), ref disableCustomLoader);
                 list.CheckboxLabeled("RimTheme_SettingsVerboseLogs".Translate(), ref verboseMode);
-                list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint, null, 30);
+
+                //Reset saved index to safe value if switching between img/vid
+                if(prevDisableVideoBg != disableVideoBg)
+                {
+                    curRandomBgIndex = 0;
+                }
             }
 
             if (SectionDefaultThemesExpanded)
@@ -158,8 +175,8 @@ namespace aRandomKiwi.RimThemes
                     list.Gap(25);
                     list.CheckboxLabeled("Centipede", ref enableCentipedeTheme);
                     list.CheckboxLabeled("Cyberpunk", ref enableCyberpunkTheme);
-                    list.CheckboxLabeled("Scyther", ref enableScytherTheme);
                     list.CheckboxLabeled("Thrumbo", ref enableThrumboTheme);
+                    list.CheckboxLabeled("Scyther", ref enableScytherTheme);
                     list.CheckboxLabeled("Classic Cassandra", ref enableClassicCassandraTheme);
                     list.CheckboxLabeled("Mechanoid Cluster", ref enableMechanoidClusterTheme);
                     list.CheckboxLabeled("Muffalo", ref enableMuffaloTheme);
@@ -172,6 +189,69 @@ namespace aRandomKiwi.RimThemes
                 GUI.color = Color.cyan;
                 list.Label("RimTheme_SettingsDefaultThemesNote".Translate());
                 GUI.color = Color.white;
+            }
+
+            if (SectionVideoExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsVideosSection".Translate()))
+            {
+                SectionVideoExpanded = !SectionVideoExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionVideoExpanded)
+            {
+                list.CheckboxLabeled("RimTheme_SettingsDisableVideoBackground".Translate(), ref disableVideoBg);
+                list.CheckboxLabeled("RimTheme_SettingsDisableLoaderVideoBackground".Translate(), ref disableLoaderVideoBg);
+                list.CheckboxLabeled("RimTheme_SettingsForceLoaderOnlyVideoBackground".Translate(), ref forceLoaderOnlyVideoBg);
+                list.CheckboxLabeled("RimTheme_SettingsThemesNoVideoForceVanilla".Translate(), ref forceVanillaVideoBgWhenNoVBG);
+            }
+
+
+            if (SectionAccessibilityExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsAccessibilitySection".Translate()))
+            {
+                SectionAccessibilityExpanded = !SectionAccessibilityExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionAccessibilityExpanded)
+            {
+                bool enableAccessibilityModePrev = enableAccessibilityMode;
+                list.CheckboxLabeled("RimTheme_SettingsEnableAccessibilityMode".Translate(), ref enableAccessibilityMode, null, 40);
+                if(enableAccessibilityModePrev != enableAccessibilityMode)
+                {
+                    if (!enableAccessibilityMode)
+                        Utils.tempEnableAccessibilityMode = false;
+                    enableAccessibilityModePrev = enableAccessibilityMode;
+                }
+            }
+
+
+            if (SectionFontsExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsFontSection".Translate()))
+            {
+                SectionFontsExpanded = !SectionFontsExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionFontsExpanded)
+            {
+                list.CheckboxLabeled("RimTheme_SettingsDisableTinyCustomFont".Translate(), ref disableTinyCustomFont);
+                list.CheckboxLabeled("RimTheme_SettingsDisableFont".Translate(), ref disableCustomFonts);
+                list.CheckboxLabeled("RimTheme_SettingsDisableCustomFontConsole".Translate(), ref disableCustomFontsInConsole);
+                list.CheckboxLabeled("RimTheme_SettingsDisableFontFilterModePoint".Translate(), ref disableFontFilterModePoint, null, 30);
             }
 
             if (SectionOpacityExpanded)
@@ -227,6 +307,17 @@ namespace aRandomKiwi.RimThemes
                 list.CheckboxLabeled("RimTheme_SettingsKeepCurrentRandomBg".Translate(), ref keepCurrentBg);
                 if (keepCurrentBg && disableRandomBg)
                     keepCurrentBg = false;
+
+                if (!disableRandomBg)
+                {
+                    list.Gap(30);
+                    if (list.ButtonText("Rimtheme_SettingsButtonRandomize".Translate()))
+                    {
+                        keepCurrentBg = false;
+                        Themes.setNewRandomBgMain();
+                        Themes.changeThemeNow(Settings.curTheme);
+                    }
+                }
             }
 
             if (SectionDialogStackingExpanded)
@@ -460,9 +551,7 @@ namespace aRandomKiwi.RimThemes
             //Change in disable random bg
             if (disableRandomBgPrev != disableRandomBg)
             {
-                //Current video bg stop if applicable
-                Themes.stopCurrentAnimatedBackground();
-                Themes.setNewRandomBg();
+                Themes.setNewRandomBgMain();
                 disableRandomBgPrev = disableRandomBg;
             }
 
@@ -554,6 +643,23 @@ namespace aRandomKiwi.RimThemes
             //settings.Write();
         }
 
+        public static string[] getCurThemeParts()
+        {
+            if (Settings.curTheme == null || !Settings.curTheme.Contains("§"))
+                Settings.curTheme = Themes.VanillaThemeID;
+
+            return Settings.curTheme.Split('§');
+        }
+
+        public static string getCurThemeForBackgroundRegen(string newTheme)
+        {
+            string ret = newTheme;
+            if (!disableRandomBg)
+                ret = curRandomBg;
+
+            return ret;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -585,9 +691,15 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<int>(ref windowAnimation, "windowAnimation", (int)WindowAnim.Theme);
             Scribe_Values.Look<bool>(ref hideLoadingText, "hideLoadingText", false);
             Scribe_Values.Look<bool>(ref verboseMode, "verboseMode", false);
-            Scribe_Values.Look<bool>(ref disableVideoBg, "disableVideoBg", true);
+            Scribe_Values.Look<bool>(ref disableVideoBg, "disableMainVideoBg", false);
+            Scribe_Values.Look<bool>(ref disableLoaderVideoBg, "disableLoaderVideoBg", false);
+            Scribe_Values.Look<bool>(ref forceLoaderOnlyVideoBg, "forceLoaderOnlyVideoBg", false);
+            Scribe_Values.Look<bool>(ref forceVanillaVideoBgWhenNoVBG, "forceVanillaVideoBgWhenNoVBG", false);
+
+
             Scribe_Values.Look<bool>(ref disableRandomBg, "disableRandomBg", true);
             Scribe_Values.Look<string>(ref curRandomBg, "curRandomBg",null);
+            Scribe_Values.Look<int>(ref curRandomBgIndex, "curRandomBgIndex", 0);
             Scribe_Values.Look<bool>(ref keepCurrentBg, "keepCurrentBg", false);
             Scribe_Values.Look<bool>(ref disableFontFilterModePoint, "disableFontFilterModePoint", true);
             Scribe_Values.Look<string>(ref lastVersionInfo, "lastVersionInfo", "");
@@ -604,6 +716,8 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref enableSingularityTheme, "enableSingularityTheme", false);
             Scribe_Values.Look<bool>(ref enableThrumboTheme, "enableThrumboTheme", true);
             Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", false);
+            Scribe_Values.Look<bool>(ref enableAccessibilityMode, "enableAccessibilityMode", false);
+            
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

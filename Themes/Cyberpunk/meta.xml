@@ -19,23 +19,23 @@
   <disableTransparentText>1</disableTransparentText>
   
   <GenUI.MouseoverColor>(60,60,60)</GenUI.MouseoverColor>
-  <Widgets.WindowBGFillColor>(28,47,59,145)</Widgets.WindowBGFillColor>
+  <Widgets.WindowBGFillColor>(28,47,59,200)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(140,140,140)</Widgets.WindowBGBorderColor>
   
-  <Widgets.TutorWindowBGFillColor>(110, 151, 113,135)</Widgets.TutorWindowBGFillColor>
+  <Widgets.TutorWindowBGFillColor>(110, 151, 113,200)</Widgets.TutorWindowBGFillColor>
   <Widgets.TutorWindowBGBorderColor>(171, 234, 175)</Widgets.TutorWindowBGBorderColor>
   
-  <Widgets.MenuSectionBGFillColor>(68,87,99,175)</Widgets.MenuSectionBGFillColor>
+  <Widgets.MenuSectionBGFillColor>(68,87,99,200)</Widgets.MenuSectionBGFillColor>
   <Widgets.MenuSectionBGBorderColor>(140,140,140)</Widgets.MenuSectionBGBorderColor>
   
-  <Widgets.OptionUnselectedBGFillColor>(68,87,99,175)</Widgets.OptionUnselectedBGFillColor>
-  <Widgets.OptionSelectedBGFillColor>(108,127,139,175)</Widgets.OptionSelectedBGFillColor>
+  <Widgets.OptionUnselectedBGFillColor>(68,87,99,200)</Widgets.OptionUnselectedBGFillColor>
+  <Widgets.OptionSelectedBGFillColor>(108,127,139,200)</Widgets.OptionSelectedBGFillColor>
   <Widgets.optionTextActiveColor>(255,255,255)</Widgets.optionTextActiveColor>
   
   <FloatMenuOption.ColorTextDisabled>(229,229,229)</FloatMenuOption.ColorTextDisabled>
-  <FloatMenuOption.ColorBGDisabled>(148,167,179,175)</FloatMenuOption.ColorBGDisabled>
-  <FloatMenuOption.ColorBGActiveMouseover>(108,127,139)</FloatMenuOption.ColorBGActiveMouseover>
-  <FloatMenuOption.ColorBGActive>(68,87,99,175)</FloatMenuOption.ColorBGActive>
+  <FloatMenuOption.ColorBGDisabled>(148,167,179,205)</FloatMenuOption.ColorBGDisabled>
+  <FloatMenuOption.ColorBGActiveMouseover>(108,127,200)</FloatMenuOption.ColorBGActiveMouseover>
+  <FloatMenuOption.ColorBGActive>(68,87,99,200)</FloatMenuOption.ColorBGActive>
   
   <textColorGray>(1.0, 1.0, 1.0)</textColorGray>
   <dynColor>(1.0,1.0,1.0,0.5)=(1.0,1.0,1.0,1.0)</dynColor>

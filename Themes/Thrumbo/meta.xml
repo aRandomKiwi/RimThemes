@@ -16,6 +16,7 @@
   <expansionsicons>false</expansionsicons>
   <disablemainrimthemeslogo>true</disablemainrimthemeslogo>
   
+  
   <GenUI.MouseoverColor>(101,50,136)</GenUI.MouseoverColor>
   <Widgets.WindowBGFillColor>(31,0,61)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(201, 145, 226)</Widgets.WindowBGBorderColor>

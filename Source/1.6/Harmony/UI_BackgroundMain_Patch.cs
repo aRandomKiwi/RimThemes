@@ -37,15 +37,14 @@ namespace aRandomKiwi.RimThemes
             {
                 //If custom loader disabled and still loading before loading step of theme textures then we leave the usual bg(NO blackscreen)
                 // Or if the current theme does not exist(steam HS, mod theme deleted)
-                if ((Settings.disableCustomLoader && !LoaderGM.themeTexAlreadyLoaded) || Settings.disableWallpaper || !Themes.currentThemeExist)
+                if ((Settings.disableCustomLoader && !LoaderGM.themeTexAlreadyLoaded) 
+                    || Settings.disableWallpaper 
+                    || (!Themes.currentThemeExist && Settings.curTheme != Themes.VanillaThemeID)
+                    || (Settings.curTheme == Themes.VanillaThemeID && Settings.disableVideoBg && Settings.disableRandomBg))
                     return true;
 
                 //Obtaining the applicable theme background
                 string curTheme = Themes.getCustomBackgroundApplyableTheme();
-
-
-                if (Settings.curTheme == Themes.VanillaThemeID && Settings.disableRandomBg)
-                    return true;
 
                 //If the animated background is available and loaded, we start reading it!
                 bool animatedBgOK = Current.ProgramState == ProgramState.Entry && Themes.DBAnimatedBackground.ContainsKey(curTheme) && !Settings.disableVideoBg;
@@ -71,7 +70,6 @@ namespace aRandomKiwi.RimThemes
                         //Utils.CurrentMainAnimatedBg == null &&
                         if (Utils.CurrentMainAnimatedBg == null)
                         {
-
                             Utils.CurrentMainAnimatedBg = Current.Root_Entry.gameObject.AddComponent<UnityEngine.Video.VideoPlayer>();
                             Utils.CurrentMainAnimatedBg.enabled = true;
                         }
@@ -88,7 +86,13 @@ namespace aRandomKiwi.RimThemes
                             Utils.CurrentMainAnimatedBg.playOnAwake = true;
 
 
-                            Utils.CurrentMainAnimatedBg.url = Themes.DBAnimatedBackground[curTheme];
+                            string url = Themes.DBAnimatedBackground[curTheme];
+                            if (!Settings.disableRandomBg && Settings.keepCurrentBg && Themes.DBAnimatedBackgroundDyn.ContainsKey(curTheme) 
+                                && Themes.DBAnimatedBackgroundDyn[curTheme].Count() > Settings.curRandomBgIndex)
+                            {
+                                url = Themes.DBAnimatedBackgroundDyn[curTheme][Settings.curRandomBgIndex];
+                            }
+                            Utils.CurrentMainAnimatedBg.url = url;
                             Utils.CurrentMainAnimatedBgSourceSet = true;
                             Utils.CurrentMainAnimatedBg.errorReceived += delegate (VideoPlayer source, string message)
                             {
@@ -136,7 +140,7 @@ namespace aRandomKiwi.RimThemes
                         position = new Rect(0f, (float)(UI.screenHeight / 2) - num2 / 2f, width, num2);
                     }
 
-                    Texture bg = Themes.getThemeTex("UI_BackgroundMain", "BGPlanet",curTheme);
+                    Texture bg = Themes.getThemeTex("UI_BackgroundMain", "BGPlanet",curTheme, Settings.disableRandomBg ? -1 : (Settings.keepCurrentBg ? Settings.curRandomBgIndex : -1));
                     if (bg != null)
                         GUI.DrawTexture(position, bg, ScaleMode.ScaleToFit);
                 }

@@ -388,6 +388,11 @@ namespace aRandomKiwi.RimThemes
             if (!(Themes.initialized && Themes.vanillaThemeSaved) || !LoaderGM.reachedMainMenu)
                 return true;
 
+            if (Utils.tempEnableAccessibilityMode)
+            {
+                Widgets.DrawBoxSolid(rect, Utils.accessibilityColor);
+            }
+
             try
             {
                 if (!Utils.tempDisableNoTransparentText && Themes.getVal("disabletransparenttext") == 1)

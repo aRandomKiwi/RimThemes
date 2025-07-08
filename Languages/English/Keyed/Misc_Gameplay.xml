@@ -8,16 +8,14 @@
 	<RimTheme_SettingsWindowsShadow>Windows shadow</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Rimworld expansions icons</RimTheme_SettingsExpansionsIcons>
 	<RimTheme_SettingsTranslationsCredits>Translations Infos</RimTheme_SettingsTranslationsCredits>
-	<RimTheme_SettingsAlphaSection>Opacity level</RimTheme_SettingsAlphaSection>
 	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>Do not override windows opacity level</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>Windows opacity level : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
-	<RimTheme_SettingsGlobalSection>Global settings</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDisableTinyCustomFont>Disable custom fonts for tiny texts</RimTheme_SettingsDisableTinyCustomFont>
 	<RimTheme_SettingsDisableFontFilterModePoint>Disable font point filter mode (if enabled can cause unreadable fonts when UI scale is enabled)</RimTheme_SettingsDisableFontFilterModePoint>
-	<RimTheme_SettingsRandomBackgroundSection>Random background</RimTheme_SettingsRandomBackgroundSection>
 	<RimTheme_SettingsKeepCurrentRandomBg>Keep current random background</RimTheme_SettingsKeepCurrentRandomBg>
 	<RimTheme_SettingsDisableRandomBg>Disable random background</RimTheme_SettingsDisableRandomBg>
 	<RimTheme_SettingsDisableVideoBackground>Disable video background</RimTheme_SettingsDisableVideoBackground>
+	<RimTheme_SettingsDisableLoaderVideoBackground>Disable loader video background</RimTheme_SettingsDisableLoaderVideoBackground>
 	<RimTheme_SettingsDialogStacking>Dialog stacking</RimTheme_SettingsDialogStacking>
 	<RimTheme_SettingsDialogStackingEnabled>Enable stacking</RimTheme_SettingsDialogStackingEnabled>
 	<RimTheme_SettingsDialogStackingDisabled>Disable stacking</RimTheme_SettingsDialogStackingDisabled>
@@ -41,11 +39,21 @@
 	<RimTheme_SettingsMenuRTLogo>RimThemes logo on the main menu</RimTheme_SettingsMenuRTLogo>
 	<RimTheme_SettingsMenuRTLogoHide>Hide</RimTheme_SettingsMenuRTLogoHide>
 	<RimTheme_SettingsMenuRTLogoShow>Show</RimTheme_SettingsMenuRTLogoShow>
-	<RimTheme_SettingsDefaultThemesSection>Default themes</RimTheme_SettingsDefaultThemesSection>
 	<RimTheme_SettingsDisableDefaultThemes>Disable all RimThemes default themes (need game restart)</RimTheme_SettingsDisableDefaultThemes>
 	<RimTheme_SettingsDefaultThemesNote>Note : Disabling or re-enabling one or all themes will only take effect when the game is restarted.</RimTheme_SettingsDefaultThemesNote>
-	
+	<Rimtheme_SettingsButtonRandomize>Randomly change the background</Rimtheme_SettingsButtonRandomize>
+	<RimTheme_SettingsForceLoaderOnlyVideoBackground>Force the loader to only show videos</RimTheme_SettingsForceLoaderOnlyVideoBackground>
+	<RimTheme_SettingsThemesNoVideoForceVanilla>Show vanilla video background when themes don't have one</RimTheme_SettingsThemesNoVideoForceVanilla>
 	<RimTheme_SettingsDeterminedByTheme>Determined by the current theme</RimTheme_SettingsDeterminedByTheme>
+	<RimTheme_SettingsEnableAccessibilityMode>Enable (add shading on certain texts with transparent background displayed on the map, for better visibility depending on the terrain)</RimTheme_SettingsEnableAccessibilityMode>
+	
+	<RimTheme_SettingsGlobalSection>Global settings</RimTheme_SettingsGlobalSection>
+	<RimTheme_SettingsDefaultThemesSection>Default themes</RimTheme_SettingsDefaultThemesSection>
+	<RimTheme_SettingsAlphaSection>Opacity level</RimTheme_SettingsAlphaSection>
+	<RimTheme_SettingsRandomBackgroundSection>Random background</RimTheme_SettingsRandomBackgroundSection>
+	<RimTheme_SettingsVideosSection>Videos</RimTheme_SettingsVideosSection>
+	<RimTheme_SettingsAccessibilitySection>Accessibility</RimTheme_SettingsAccessibilitySection>
+	<RimTheme_SettingsFontSection>Fonts</RimTheme_SettingsFontSection>
 	
 	<RimTheme_SettingsWindowAnimation>Window animation</RimTheme_SettingsWindowAnimation>
 	<RimTheme_SettingsWindowAnimationNone>Disabled</RimTheme_SettingsWindowAnimationNone>

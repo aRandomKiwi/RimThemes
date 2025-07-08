@@ -16,7 +16,7 @@
 
   <TapestryBorderColor>(0,0,0,0)</TapestryBorderColor>
 
-  <Widgets.WindowBGFillColor>(41,74,36,187)</Widgets.WindowBGFillColor>
+  <Widgets.WindowBGFillColor>(41,74,36,200)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(184,221,177,237)</Widgets.WindowBGBorderColor>
   
   <Widgets.TutorWindowBGFillColor>(145,130,70)</Widgets.TutorWindowBGFillColor>
@@ -27,12 +27,12 @@
   <Widgets.OptionUnselectedBGFillColor>(25,40,35)</Widgets.OptionUnselectedBGFillColor>
   <Widgets.OptionSelectedBGFillColor>(60,80,75)</Widgets.OptionSelectedBGFillColor>
   <Widgets.optionTextActiveColor>(255,255,255)</Widgets.optionTextActiveColor>
-  <Widgets.OptionUnselectedBGBorderColor>(0,0,0,175)</Widgets.OptionUnselectedBGBorderColor>
-  <Widgets.OptionSelectedBGBorderColor>(0,0,0,175)</Widgets.OptionSelectedBGBorderColor>
+  <Widgets.OptionUnselectedBGBorderColor>(0,0,0,200)</Widgets.OptionUnselectedBGBorderColor>
+  <Widgets.OptionSelectedBGBorderColor>(0,0,0,200)</Widgets.OptionSelectedBGBorderColor>
   
   <FloatMenuOption.ColorTextDisabled>(250,220,210)</FloatMenuOption.ColorTextDisabled>
-  <FloatMenuOption.ColorBGDisabled>(50,25,20,185)</FloatMenuOption.ColorBGDisabled>
-  <FloatMenuOption.ColorBGActiveMouseover>(11,57,11,185)</FloatMenuOption.ColorBGActiveMouseover>
+  <FloatMenuOption.ColorBGDisabled>(50,25,20,205)</FloatMenuOption.ColorBGDisabled>
+  <FloatMenuOption.ColorBGActiveMouseover>(11,57,11,200)</FloatMenuOption.ColorBGActiveMouseover>
   <FloatMenuOption.ColorBGActive>(1,74,0,185)</FloatMenuOption.ColorBGActive>
 
   

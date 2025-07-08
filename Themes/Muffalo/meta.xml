@@ -16,18 +16,18 @@
   <translationsInfos>false</translationsInfos>
   
   <GenUI.MouseoverColor>(44,67,112)</GenUI.MouseoverColor>
-  <Widgets.WindowBGFillColor>(29,45,73,90)</Widgets.WindowBGFillColor>
+  <Widgets.WindowBGFillColor>(29,45,73,200)</Widgets.WindowBGFillColor>
   <Widgets.WindowBGBorderColor>(102, 153, 255)</Widgets.WindowBGBorderColor>
-  <Widgets.TutorWindowBGFillColor>(110, 151, 113,135)</Widgets.TutorWindowBGFillColor>
+  <Widgets.TutorWindowBGFillColor>(110, 151, 113,200)</Widgets.TutorWindowBGFillColor>
   <Widgets.TutorWindowBGBorderColor>(171, 234, 175)</Widgets.TutorWindowBGBorderColor>
-  <Widgets.MenuSectionBGFillColor>(37, 42, 68,175)</Widgets.MenuSectionBGFillColor>
+  <Widgets.MenuSectionBGFillColor>(37, 42, 68,200)</Widgets.MenuSectionBGFillColor>
   <Widgets.MenuSectionBGBorderColor>(142, 211, 255)</Widgets.MenuSectionBGBorderColor>
-  <Widgets.OptionUnselectedBGFillColor>(29,45,73,175)</Widgets.OptionUnselectedBGFillColor>
-  <Widgets.OptionSelectedBGFillColor>(89,105,133,175)</Widgets.OptionSelectedBGFillColor>
+  <Widgets.OptionUnselectedBGFillColor>(29,45,73,200)</Widgets.OptionUnselectedBGFillColor>
+  <Widgets.OptionSelectedBGFillColor>(89,105,133,200)</Widgets.OptionSelectedBGFillColor>
   <Widgets.optionTextActiveColor>(255,255,255)</Widgets.optionTextActiveColor>
   
   <FloatMenuOption.ColorTextDisabled>(229,229,229)</FloatMenuOption.ColorTextDisabled>
-  <FloatMenuOption.ColorBGDisabled>(119,124,255,175)</FloatMenuOption.ColorBGDisabled>
-  <FloatMenuOption.ColorBGActiveMouseover>(89,105,133,139)</FloatMenuOption.ColorBGActiveMouseover>
+  <FloatMenuOption.ColorBGDisabled>(119,124,255,200)</FloatMenuOption.ColorBGDisabled>
+  <FloatMenuOption.ColorBGActiveMouseover>(89,105,133,200)</FloatMenuOption.ColorBGActiveMouseover>
   <FloatMenuOption.ColorBGActive>(29,45,73,175)</FloatMenuOption.ColorBGActive>
 </RimThemes>
