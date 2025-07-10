@@ -114,7 +114,7 @@ namespace aRandomKiwi.RimThemes
                     }
                     else
                     {
-                        GUI.DrawTexture(pos, Utils.CurrentMainAnimatedBg.texture, ScaleMode.ScaleToFit);
+                        GUI.DrawTexture(pos, Utils.CurrentMainAnimatedBg.texture, ScaleMode.StretchToFill);
                     }
                 }
 
@@ -142,7 +142,7 @@ namespace aRandomKiwi.RimThemes
 
                     Texture bg = Themes.getThemeTex("UI_BackgroundMain", "BGPlanet",curTheme, Settings.disableRandomBg ? -1 : (Settings.keepCurrentBg ? Settings.curRandomBgIndex : -1));
                     if (bg != null)
-                        GUI.DrawTexture(position, bg, ScaleMode.ScaleToFit);
+                        GUI.DrawTexture(position, bg, ScaleMode.StretchToFill);
                 }
 
                 return false;

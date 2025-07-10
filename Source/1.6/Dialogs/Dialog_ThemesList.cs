@@ -186,7 +186,7 @@ namespace aRandomKiwi.RimThemes
                 }
                 catch (Exception e)
                 {
-                    Log.Message(e.Message);
+                    Debug.Log("[ThemesList] "+e.Message);
                 }
             }
             //Deactivation forcing theme
