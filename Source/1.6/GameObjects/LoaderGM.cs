@@ -11,13 +11,13 @@ using Verse.Steam;
 using Verse;
 using HarmonyLib;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Video;
 using Object = UnityEngine.Object;
 using Random = System.Random;
 
 namespace aRandomKiwi.RimThemes
 {
+    [StaticConstructorOnStartup]
     public class LoaderGM : MonoBehaviour
     {
         public void OnGUI()
@@ -130,7 +130,6 @@ namespace aRandomKiwi.RimThemes
                             }
 
                             GUI.DrawTexture(position, CurrentMainAnimatedBg.texture, ScaleMode.StretchToFill);
-                            //Log.Message("Draw Video Tex "+ CurrentMainAnimatedBg.isPaused+" "+ CurrentMainAnimatedBg.isPlaying+" "+CurrentMainAnimatedBg.isPrepared+" "+ (CurrentMainAnimatedBg.texture == null));
                         }
                         else
                         {
@@ -950,7 +949,6 @@ namespace aRandomKiwi.RimThemes
 
         public static void stopCurrentAnimatedbackgroundLoader()
         {
-            //Log.Message("stopCurrentAnimatedbackgroundLoader");
             videoBg = null;
             CurrentMainAnimatedBgPlaying = false;
             CurrentMainAnimatedBgSourceSet = false;
