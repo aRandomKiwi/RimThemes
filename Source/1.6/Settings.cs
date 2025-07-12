@@ -743,7 +743,7 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref enableThrumboTheme, "enableThrumboTheme", true);
             Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", false);
             Scribe_Values.Look<bool>(ref enableAccessibilityMode, "enableAccessibilityMode", false);
-            Scribe_Values.Look<int>(ref bgTextureScaleMode, "bgTextureScaleMode", 1);
+            Scribe_Values.Look<int>(ref bgTextureScaleMode, "bgTextureScaleMode", 2);
             
 
 
