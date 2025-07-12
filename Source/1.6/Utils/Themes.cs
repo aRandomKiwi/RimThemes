@@ -2102,10 +2102,13 @@ namespace aRandomKiwi.RimThemes
          */
         public static void drawParticle(Rect rect)
         {
+            if (Settings.disableParticle)
+                return;
+
             Texture2D tex = getThemeParticle();
             string partMode;
 
-            if (Settings.disableParticle || tex == null || rect.width < 80f)
+            if (tex == null || rect.width < 80f)
                 return;
 
             partMode = getText("particlemode");

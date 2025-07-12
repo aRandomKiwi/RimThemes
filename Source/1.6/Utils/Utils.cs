@@ -175,7 +175,8 @@ namespace aRandomKiwi.RimThemes
                     || theme == "Scyther" && Settings.enableScytherTheme
                     || theme == "Singularity" && Settings.enableSingularityTheme
                     || theme == "Thrumbo" && Settings.enableThrumboTheme
-                    || theme == "USFM" && Settings.enableUSFMTheme)
+                    || theme == "USFM" && Settings.enableUSFMTheme
+                    || theme == "CentipedeClassic" && Settings.enableCentipedeClassicTheme)
             {
                 return true;
             }

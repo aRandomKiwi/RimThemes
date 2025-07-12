@@ -75,7 +75,7 @@ namespace aRandomKiwi.RimThemes
         public static bool enableRimLife2Theme = false;
         public static bool enableSingularityTheme = false;
         public static bool enableUSFMTheme = false;
-
+        public static bool enableCentipedeClassicTheme = true;
 
         public static bool SectionGeneralExpanded = false;
         public static bool SectionDefaultThemesExpanded = false;
@@ -184,6 +184,7 @@ namespace aRandomKiwi.RimThemes
                     list.CheckboxLabeled("Rim-Life 2", ref enableRimLife2Theme);
                     list.CheckboxLabeled("Singularity", ref enableSingularityTheme);
                     list.CheckboxLabeled("USFM", ref enableUSFMTheme);
+                    list.CheckboxLabeled("Centipede Classic", ref enableCentipedeClassicTheme);
                 }
                 list.GapLine();
                 GUI.color = Color.cyan;
@@ -706,6 +707,7 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref disableTinyCustomFont, "disableTinyCustomFont", false);
 
             Scribe_Values.Look<bool>(ref enableCentipedeTheme, "enableCentipedeTheme", true);
+            Scribe_Values.Look<bool>(ref enableCentipedeClassicTheme, "enableCentipedeClassicTheme", false);
             Scribe_Values.Look<bool>(ref enableClassicCassandraTheme, "enableClassicCassandraTheme", false);
             Scribe_Values.Look<bool>(ref enableCyberpunkTheme, "enableCyberpunkTheme", true);
             Scribe_Values.Look<bool>(ref enableMechanoidClusterTheme, "enableMechanoidClusterTheme", false);
