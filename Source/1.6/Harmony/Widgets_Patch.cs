@@ -164,7 +164,10 @@ namespace aRandomKiwi.RimThemes
         [HarmonyPrefix]
         static bool Prefix(ref bool __result, Rect rect, string label, float barPercent = 0f, float textLeftMargin = -1f, SoundDef mouseoverSound = null, Vector2 functionalSizeOffset = default(Vector2), Color? labelColor = null, bool highlight = false)
         {
-            if (!(Themes.initialized && Themes.vanillaThemeSaved) || textLeftMargin == 8f || Settings.disableParticle)
+            if (Settings.disableParticle)
+                return true;
+
+            if (!(Themes.initialized && Themes.vanillaThemeSaved) || textLeftMargin == 8f)
                 return true;
 
             try
