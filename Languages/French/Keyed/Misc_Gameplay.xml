@@ -46,7 +46,9 @@
 	<RimTheme_SettingsThemesNoVideoForceVanilla>Afficher le fond d'écran vidéo vanilla quand des thémes n'en posséde pas</RimTheme_SettingsThemesNoVideoForceVanilla>
 	<RimTheme_SettingsDeterminedByTheme>Déterminé par le thème activé</RimTheme_SettingsDeterminedByTheme>
 	<RimTheme_SettingsEnableAccessibilityMode>Ajouter un ombrage sur certains textes avec fond transparent affiché sur la map, pour une meilleure visibilitée en fonction du terrain)</RimTheme_SettingsEnableAccessibilityMode>
-	
+	<RimTheme_SettingsBgTextureScaleModeStretchToFill>Étirer pour remplir</RimTheme_SettingsBgTextureScaleModeStretchToFill>
+	<RimTheme_SettingsBgTextureScaleModeScaleToFit>Mettre à l'échelle pour s'adapter</RimTheme_SettingsBgTextureScaleModeScaleToFit>
+	<RimTheme_SettingsBgTextureScaleModeScaleAndCrop>Mise à l'échelle et recadrage</RimTheme_SettingsBgTextureScaleModeScaleAndCrop>
 	
 	<RimTheme_SettingsGlobalSection>Paramètres généraux</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDefaultThemesSection>Thèmes par défaut</RimTheme_SettingsDefaultThemesSection>
@@ -55,6 +57,7 @@
 	<RimTheme_SettingsVideosSection>Vidéos</RimTheme_SettingsVideosSection>
 	<RimTheme_SettingsAccessibilitySection>Accessibilité</RimTheme_SettingsAccessibilitySection>
 	<RimTheme_SettingsFontSection>Polices d'écriture</RimTheme_SettingsFontSection>
+	<RimTheme_SettingsBgTextureScaleModeSection>Mode d'échelle d'arrière-plan</RimTheme_SettingsBgTextureScaleModeSection>
 	
 	<RimTheme_SettingsWindowAnimation>Animation d'apparition de fenêtre</RimTheme_SettingsWindowAnimation>
 	<RimTheme_SettingsWindowAnimationNone>Désactivé</RimTheme_SettingsWindowAnimationNone>

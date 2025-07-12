@@ -1988,6 +1988,19 @@ namespace aRandomKiwi.RimThemes
         }
 
         /*
+        * Obtaining the applicable background texture scale parameter mode
+        */
+        public static ScaleMode applicableScaleMode()
+        {
+            if (Settings.bgTextureScaleMode == 1)
+                return ScaleMode.StretchToFill;
+            else if (Settings.bgTextureScaleMode == 2)
+                return ScaleMode.ScaleToFit;
+            else
+                return ScaleMode.ScaleAndCrop;
+        }
+
+        /*
         * Obtaining the applicable extension icons display mode according to the theme (by default yes)
         */
         public static bool expansionsIcons()

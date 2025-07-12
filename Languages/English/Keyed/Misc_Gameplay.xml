@@ -46,6 +46,10 @@
 	<RimTheme_SettingsThemesNoVideoForceVanilla>Show vanilla video background when themes don't have one</RimTheme_SettingsThemesNoVideoForceVanilla>
 	<RimTheme_SettingsDeterminedByTheme>Determined by the current theme</RimTheme_SettingsDeterminedByTheme>
 	<RimTheme_SettingsEnableAccessibilityMode>Enable (add shading on certain texts with transparent background displayed on the map, for better visibility depending on the terrain)</RimTheme_SettingsEnableAccessibilityMode>
+	<RimTheme_SettingsBgTextureScaleModeStretchToFill>Stretch to fill</RimTheme_SettingsBgTextureScaleModeStretchToFill>
+	<RimTheme_SettingsBgTextureScaleModeScaleToFit>Scale to fit</RimTheme_SettingsBgTextureScaleModeScaleToFit>
+	<RimTheme_SettingsBgTextureScaleModeScaleAndCrop>Scale and crop</RimTheme_SettingsBgTextureScaleModeScaleAndCrop>
+
 	
 	<RimTheme_SettingsGlobalSection>Global settings</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDefaultThemesSection>Default themes</RimTheme_SettingsDefaultThemesSection>
@@ -54,6 +58,7 @@
 	<RimTheme_SettingsVideosSection>Videos</RimTheme_SettingsVideosSection>
 	<RimTheme_SettingsAccessibilitySection>Accessibility</RimTheme_SettingsAccessibilitySection>
 	<RimTheme_SettingsFontSection>Fonts</RimTheme_SettingsFontSection>
+	<RimTheme_SettingsBgTextureScaleModeSection>Background Scale Mode</RimTheme_SettingsBgTextureScaleModeSection>
 	
 	<RimTheme_SettingsWindowAnimation>Window animation</RimTheme_SettingsWindowAnimation>
 	<RimTheme_SettingsWindowAnimationNone>Disabled</RimTheme_SettingsWindowAnimationNone>

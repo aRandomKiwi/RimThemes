@@ -16,6 +16,7 @@ namespace aRandomKiwi.RimThemes
             overrideThemeWindowFillColorAlphaLevelTmp = overrideThemeWindowFillColorAlphaLevel;
         }
 
+        public static int bgTextureScaleMode = 2;
         public static bool disabledOverrideThemeWindowFillColorAlpha = true;
         public static float overrideThemeWindowFillColorAlphaLevel = 0.75f;
         public static float overrideThemeWindowFillColorAlphaLevelTmp = 0.75f;
@@ -93,6 +94,7 @@ namespace aRandomKiwi.RimThemes
         public static bool SectionInfosExpanded = false;
         public static bool SectionAccessibilityExpanded = false;
         public static bool SectionFontsExpanded = false;
+        public static bool SectionBgTextureScaleModeExpanded = false;
 
         public static Vector2 scrollPosition = Vector2.zero;
 
@@ -528,6 +530,28 @@ namespace aRandomKiwi.RimThemes
                     cornerInfoMode = 2;
             }
 
+
+            if (SectionBgTextureScaleModeExpanded)
+                GUI.color = Color.gray;
+            else
+                GUI.color = Color.green;
+
+            if (list.ButtonText("RimTheme_SettingsBgTextureScaleModeSection".Translate()))
+            {
+                SectionBgTextureScaleModeExpanded = !SectionBgTextureScaleModeExpanded;
+            }
+            GUI.color = Color.white;
+
+            if (SectionBgTextureScaleModeExpanded)
+            {
+                if (list.RadioButton("RimTheme_SettingsBgTextureScaleModeStretchToFill".Translate(), (bgTextureScaleMode == 1)))
+                    bgTextureScaleMode = 1;
+                if (list.RadioButton("RimTheme_SettingsBgTextureScaleModeScaleToFit".Translate(), (bgTextureScaleMode == 2)))
+                    bgTextureScaleMode = 2;
+                if (list.RadioButton("RimTheme_SettingsBgTextureScaleModeScaleAndCrop".Translate(), (bgTextureScaleMode == 3)))
+                    bgTextureScaleMode = 3;
+            }
+
             //Change in disable custom font
             if (disableCustomFontsPrev != disableCustomFonts)
             {
@@ -719,7 +743,10 @@ namespace aRandomKiwi.RimThemes
             Scribe_Values.Look<bool>(ref enableThrumboTheme, "enableThrumboTheme", true);
             Scribe_Values.Look<bool>(ref enableUSFMTheme, "enableUSFMTheme", false);
             Scribe_Values.Look<bool>(ref enableAccessibilityMode, "enableAccessibilityMode", false);
+            Scribe_Values.Look<int>(ref bgTextureScaleMode, "bgTextureScaleMode", 1);
             
+
+
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

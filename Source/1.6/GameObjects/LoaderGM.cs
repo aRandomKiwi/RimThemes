@@ -84,7 +84,7 @@ namespace aRandomKiwi.RimThemes
                     }
 
                     if(picBgTex != null)
-                        GUI.DrawTexture(position, picBgTex, ScaleMode.StretchToFill);
+                        GUI.DrawTexture(position, picBgTex, Themes.applicableScaleMode());
                     else
                     {
                         if (!CurrentMainAnimatedBgPlaying)
@@ -120,7 +120,7 @@ namespace aRandomKiwi.RimThemes
                             }
                         }
 
-                        GUI.DrawTexture(position, getDefaultBGLoader(), ScaleMode.StretchToFill);
+                        GUI.DrawTexture(position, getDefaultBGLoader(), Themes.applicableScaleMode());
                         if (CurrentMainAnimatedBg != null)
                         {
                             if (CurrentMainAnimatedBg.texture == null && CurrentMainAnimatedBgPlaying)
@@ -129,7 +129,7 @@ namespace aRandomKiwi.RimThemes
                                 CurrentMainAnimatedBgPlaying = false;
                             }
 
-                            GUI.DrawTexture(position, CurrentMainAnimatedBg.texture, ScaleMode.StretchToFill);
+                            GUI.DrawTexture(position, CurrentMainAnimatedBg.texture, Themes.applicableScaleMode());
                         }
                         else
                         {
