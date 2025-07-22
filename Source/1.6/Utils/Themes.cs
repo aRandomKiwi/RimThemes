@@ -1874,11 +1874,26 @@ namespace aRandomKiwi.RimThemes
                 LibAPNG.Frame[] frames = png.Frames;
                 Texture2D curTex;
 
-                for (var i = 0; i != frames.Count(); i++)
+                //No Animations found, try to load the APNG as a PNG
+                if (png.Frames.Length == 0)
                 {
                     curTex = new Texture2D(196, 196, TextureFormat.ARGB32, false);
-                    curTex.LoadImage(frames[i].GetStream().ToArray());
-                    DBLoader[Settings.curTheme][i] = curTex;
+                    if (!curTex.LoadImage(File.ReadAllBytes(customLoaderPath)))
+                        throw new Exception();
+                    else
+                    {
+                        DBLoader[Settings.curTheme] = new Texture2D[1];
+                        DBLoader[Settings.curTheme][0] = curTex;
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i != frames.Count(); i++)
+                    {
+                        curTex = new Texture2D(196, 196, TextureFormat.ARGB32, false);
+                        curTex.LoadImage(frames[i].GetStream().ToArray());
+                        DBLoader[Settings.curTheme][i] = curTex;
+                    }
                 }
             }
             catch (Exception e)
