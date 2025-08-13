@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LanguageData>
 	<RimTheme_InfoCorner>信息角</RimTheme_InfoCorner>
 	<RimTheme_LudeonLogo>Ludeon徽标</RimTheme_LudeonLogo>
@@ -7,6 +7,9 @@
 	<RimTheme_BecomeASponsor>成为新的RimThemes主要捐助者！</RimTheme_BecomeASponsor>
 	<RimTheme_SettingsWindowsShadow>Windows阴影</RimTheme_SettingsWindowsShadow>
 	<RimTheme_SettingsExpansionsIcons>Rimworld扩展图标</RimTheme_SettingsExpansionsIcons>
+	<RimTheme_SettingsAlphaSection>不透明度</RimTheme_SettingsAlphaSection>
+	<RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>禁用窗口不透明度重设（需要重启以恢复预设不透明度）</RimTheme_SettingsDisableOverrideWindowFillColorAlphaLevel>
+	<RimTheme_SettingsOverrideWindowFillColorAlphaLevel>窗口不透明度 : {0}%</RimTheme_SettingsOverrideWindowFillColorAlphaLevel>
 	<RimTheme_SettingsGlobalSection>全局设置</RimTheme_SettingsGlobalSection>
 	<RimTheme_SettingsDisableTinyCustomFont>禁用小文本的自定义字体</RimTheme_SettingsDisableTinyCustomFont>
 	<RimTheme_SettingsDisableFontFilterModePoint>禁用字体点过滤器模式 （如果启用了UI缩放，则启用时会导致无法读取的字体）</RimTheme_SettingsDisableFontFilterModePoint>
@@ -31,18 +34,18 @@
 	<RimTheme_SettingsDisableButtonBG>禁用按钮背景</RimTheme_SettingsDisableButtonBG>
 	<RimTheme_SettingsDisableTapestry>禁用挂毯</RimTheme_SettingsDisableTapestry>
 	<RimTheme_SettingsMenuAlignment>主菜单对齐</RimTheme_SettingsMenuAlignment>
-	<RimTheme_SettingsMenuAlignmentLeft>剩下</RimTheme_SettingsMenuAlignmentLeft>
-	<RimTheme_SettingsMenuAlignmentMiddle>中间</RimTheme_SettingsMenuAlignmentMiddle>
-	<RimTheme_SettingsMenuAlignmentRight>对</RimTheme_SettingsMenuAlignmentRight>
+	<RimTheme_SettingsMenuAlignmentLeft>靠左</RimTheme_SettingsMenuAlignmentLeft>
+	<RimTheme_SettingsMenuAlignmentMiddle>居中</RimTheme_SettingsMenuAlignmentMiddle>
+	<RimTheme_SettingsMenuAlignmentRight>靠右</RimTheme_SettingsMenuAlignmentRight>
 	<RimTheme_SettingsMenuRTLogo>主菜单上的RimThemes徽标</RimTheme_SettingsMenuRTLogo>
 	<RimTheme_SettingsMenuRTLogoHide>隐藏</RimTheme_SettingsMenuRTLogoHide>
-	<RimTheme_SettingsMenuRTLogoShow>表演</RimTheme_SettingsMenuRTLogoShow>
+	<RimTheme_SettingsMenuRTLogoShow>显示</RimTheme_SettingsMenuRTLogoShow>
 	
 	<RimTheme_SettingsDeterminedByTheme>由当前主题决定</RimTheme_SettingsDeterminedByTheme>
 	
 	<RimTheme_SettingsWindowAnimation>窗口动画</RimTheme_SettingsWindowAnimation>
-	<RimTheme_SettingsWindowAnimationNone>残</RimTheme_SettingsWindowAnimationNone>
-	<RimTheme_SettingsWindowAnimationClip>夹</RimTheme_SettingsWindowAnimationClip>
+	<RimTheme_SettingsWindowAnimationNone>无</RimTheme_SettingsWindowAnimationNone>
+	<RimTheme_SettingsWindowAnimationClip>拉伸</RimTheme_SettingsWindowAnimationClip>
 	<RimTheme_SettingsWindowAnimationSlideLeft>向左滑动</RimTheme_SettingsWindowAnimationSlideLeft>
 	<RimTheme_SettingsWindowAnimationSlideRight>向右滑动</RimTheme_SettingsWindowAnimationSlideRight>
 	<RimTheme_SettingsWindowAnimationSlideTop>滑动顶部</RimTheme_SettingsWindowAnimationSlideTop>
